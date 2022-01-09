@@ -15,7 +15,3 @@ class TestMLP(unittest.TestCase):
         out = tmlp.apply({"params": params}, x, False, rngs={"dropout": drop})
 
         self.assertEqual(out.shape, x.shape[:-1] + (out_dim,))
-
-
-if __name__ == "__main__":
-    unittest.main()

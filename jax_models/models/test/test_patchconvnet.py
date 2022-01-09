@@ -2,7 +2,7 @@ import unittest
 from jax import random
 import jax.numpy as jnp
 
-from patchconvnet import (
+from ..patchconvnet import (
     ConvolutionalStem,
     TrunkBlock,
     AttentionPoolingBlock,
@@ -55,7 +55,3 @@ class PatchConvNetTest(unittest.TestCase):
             {"params": params}, x, False, rngs={"dropout": rng2, "drop_path": rng3}
         ).shape
         self.assertEqual(logits_shape, (1, num_classes))
-
-
-if __name__ == "__main__":
-    unittest.main()

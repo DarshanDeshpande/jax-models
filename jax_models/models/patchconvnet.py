@@ -3,7 +3,7 @@ import jax.numpy as jnp
 import flax.linen as nn
 from typing import Optional
 
-from layers import SqueezeAndExcitation, DropPath, TransformerMLP
+from ..layers import SqueezeAndExcitation, DropPath, TransformerMLP
 
 
 class ConvolutionalStem(nn.Module):
@@ -117,7 +117,7 @@ class AttentionPoolingBlock(nn.Module):
         token = token + drop_att
 
         norm = nn.LayerNorm()(token)
-        x = TransformerMLP(dim=hidden_dim, out_dim=self.dim, dropout=self.dropout)(norm)
+        x = TransformerMLP(dim=hidden_dim, out_dim=self.dim, dropout=self.dropout)(norm, deterministic)
         scaled_mlp = gamma_2 * x
         drop_mlp = DropPath(self.dropout)(scaled_mlp, deterministic=deterministic)
         token = token + drop_mlp

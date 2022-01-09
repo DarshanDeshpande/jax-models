@@ -11,7 +11,3 @@ class TestSqueezeAndExcitation(unittest.TestCase):
         x = jnp.zeros([1, 32, 32, 256])
         params = sae.init({"params": random.PRNGKey(0)}, x)["params"]
         self.assertEqual(sae.apply({"params": params}, x).shape, x.shape)
-
-
-if __name__ == "__main__":
-    unittest.main()

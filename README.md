@@ -43,6 +43,7 @@ Available model implementations for JAX are:
 2. <a href="https://arxiv.org/abs/2112.13692v1">Augmenting Convolutional networks with attention-based aggregation</a> (Hugo Touvron et al., 2021)
 3. <a href="https://arxiv.org/abs/2112.11010">MPViT : Multi-Path Vision Transformer for Dense Prediction</a> (Youngwan Lee et al., 2021)
 4. <a href="https://arxiv.org/abs/2105.01601v1">MLP-Mixer: An all-MLP Architecture for Vision</a> (Ilya Tolstikhin et al., 2021)
+5. <a href="https://openreview.net/pdf?id=TVHS5Y4dNvM">Patches Are All You Need</a> (Anonymous et al., 2021)
 
 <br>
 Available layers for out-of-the-box integration:

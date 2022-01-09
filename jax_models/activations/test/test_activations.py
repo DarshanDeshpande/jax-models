@@ -29,7 +29,3 @@ class TestActivations(unittest.TestCase):
         params = prelu.init({"params": random.PRNGKey(0)}, x)["params"]
         out = prelu.apply({"params": params}, x)
         np.testing.assert_allclose(out, np.asarray([[1, 7, 0, 0, 0]])) is None
-
-
-if __name__ == "__main__":
-    unittest.main()

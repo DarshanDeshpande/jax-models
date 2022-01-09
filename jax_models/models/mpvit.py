@@ -3,8 +3,8 @@ import jax.numpy as jnp
 import flax.linen as nn
 from typing import Optional, Union, Sequence, Iterable
 
-from layers import DepthwiseConv2D, SeparableDepthwiseConv2D
-from activations import hardswish
+from ..layers import DepthwiseConv2D, SeparableDepthwiseConv2D
+from ..activations import hardswish
 
 
 class ConvolutionalStem(nn.Module):

@@ -3,14 +3,14 @@ import unittest
 import jax.numpy as jnp
 import jax.random as random
 
-from mpvit.layers import (
+from ..mpvit import (
     ConvolutionalStem,
     MultiScalePatchEmbedding,
     ConvolutionalLocalFeature,
     FactorizedAttention,
     MultiPathTransformerBlock,
 )
-from mpvit.models import MPViT_Tiny, MPViT_XSmall, MPViT_Small, MPViT_Base
+from ..mpvit import MPViT_Tiny, MPViT_XSmall, MPViT_Small, MPViT_Base
 
 
 class Layer_Tests(unittest.TestCase):
@@ -152,7 +152,3 @@ class MPViT_Tests(unittest.TestCase):
             rngs={"dropout": drop},
         )
         self.assertEqual(out.shape, (1, 16, 480))
-
-
-if __name__ == "__main__":
-    unittest.main()

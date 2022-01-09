@@ -2,16 +2,23 @@ import flax.linen as nn
 import jax.numpy as jnp
 
 from typing import Optional
-from layers import TransformerMLP
+from ..layers import TransformerMLP
+
 
 class TransformerEncoder(nn.Module):
     mlp_dim: int
     pool_size: int
     stride: int
+    dropout: float
     deterministic: Optional[bool] = None
 
     @nn.compact
     def __call__(self, inputs, deterministic=None):
+
+        deterministic = nn.merge_param(
+            "deterministic", self.deterministic, deterministic
+        )
+        
         norm = nn.LayerNorm()(inputs)
         att = nn.avg_pool(
             norm,
