@@ -3,8 +3,8 @@ import jax.numpy as jnp
 import flax.linen as nn
 from typing import Optional, Union, Sequence, Iterable
 
-from ..layers import DepthwiseConv2D, SeparableDepthwiseConv2D
-from ..activations import hardswish
+from layers import DepthwiseConv2D, SeparableDepthwiseConv2D
+from activations import hardswish
 
 
 class ConvolutionalStem(nn.Module):
@@ -335,6 +335,8 @@ class Model(nn.Module):
     mlp_ratio: int = 2
     channels_list: Iterable = (64, 96, 176, 216)
     num_layers_list: Iterable = (1, 2, 4, 1)
+    att_drop: float = 0.2
+    proj_drop: float = 0.2
     attach_head: bool = True
     num_classes: int = 1000
     deterministic: Optional[bool] = None
@@ -354,6 +356,8 @@ class Model(nn.Module):
                 num_heads=8,
                 num_encoder_layers=j,
                 mlp_ratio=self.mlp_ratio,
+                att_drop=self.att_drop,
+                proj_drop=self.proj_drop,
             )(mspe, deterministic)
 
         if self.attach_head:
@@ -366,41 +370,49 @@ class Model(nn.Module):
         return mptb
 
 
-def MPViT_Tiny(attach_head=True, num_classes=1000):
+def MPViT_Tiny(attach_head=True, num_classes=1000, dropout=0.1):
     return Model(
         mlp_ratio=2,
         channels_list=(64, 96, 176, 216),
         num_layers_list=(1, 2, 4, 1),
         attach_head=attach_head,
         num_classes=num_classes,
+        att_drop=dropout,
+        proj_drop=dropout,
     )
 
 
-def MPViT_XSmall(attach_head=True, num_classes=1000):
+def MPViT_XSmall(attach_head=True, num_classes=1000, dropout=0.1):
     return Model(
         mlp_ratio=4,
         channels_list=(64, 128, 192, 256),
         num_layers_list=(1, 2, 4, 1),
         attach_head=attach_head,
         num_classes=num_classes,
+        att_drop=dropout,
+        proj_drop=dropout,
     )
 
 
-def MPViT_Small(attach_head=True, num_classes=1000):
+def MPViT_Small(attach_head=True, num_classes=1000, dropout=0.1):
     return Model(
         mlp_ratio=4,
         channels_list=(64, 128, 216, 288),
         num_layers_list=(1, 3, 6, 3),
         attach_head=attach_head,
         num_classes=num_classes,
+        att_drop=dropout,
+        proj_drop=dropout,
     )
 
 
-def MPViT_Base(attach_head=True, num_classes=1000):
+def MPViT_Base(attach_head=True, num_classes=1000, dropout=0.1):
     return Model(
         mlp_ratio=4,
         channels_list=(128, 224, 368, 480),
         num_layers_list=(1, 3, 8, 3),
         attach_head=attach_head,
         num_classes=num_classes,
+        att_drop=dropout,
+        proj_drop=dropout,
     )

@@ -15,6 +15,15 @@ from .poolformer import (
     PoolFormer_M48,
 )
 
+from .mlp_mixer import (
+    MLPMixer_S16,
+    MLPMixer_S32,
+    MLPMixer_B32,
+    MLPMixer_L16,
+    MLPMixer_L32,
+    MLPMixer_H14,
+)
+
 model_dict = {
     "mpvit-tiny": MPViT_Tiny,
     "mpvit-xsmall": MPViT_XSmall,
@@ -31,6 +40,12 @@ model_dict = {
     "poolformer-s36": PoolFormer_S36,
     "poolformer-m36": PoolFormer_M36,
     "poolformer-m48": PoolFormer_M48,
+    "mlpmixer-s16": MLPMixer_S16,
+    "mlpmixer-s32": MLPMixer_S32,
+    "mlpmixer-b32": MLPMixer_B32,
+    "mlpmixer-l16": MLPMixer_L16,
+    "mlpmixer-l32": MLPMixer_L32,
+    "mlpmixer-h14": MLPMixer_H14,
 }
 
 
@@ -38,5 +53,5 @@ def list_models():
     return model_dict.keys()
 
 
-def load_model(model_str="", attach_head=False, num_classes=1000):
-    return model_dict[model_str](attach_head, num_classes)
+def load_model(model_str="", attach_head=False, num_classes=1000, dropout=0.1):
+    return model_dict[model_str](attach_head, num_classes, dropout=dropout)
