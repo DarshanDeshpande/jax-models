@@ -2,7 +2,7 @@ import unittest
 import jax.random as random
 import jax.numpy as jnp
 
-from ..squeeze_and_excite_layer import SqueezeAndExcitation
+from jax_models.layers import SqueezeAndExcitation
 
 
 class TestSqueezeAndExcitation(unittest.TestCase):

@@ -3,7 +3,7 @@ import jax.numpy as jnp
 import jax.random as random
 import numpy as np
 
-from ..activations import PReLU, mish, hardswish, relu6
+from jax_models.activations import PReLU, mish, hardswish, relu6
 
 
 class TestActivations(unittest.TestCase):

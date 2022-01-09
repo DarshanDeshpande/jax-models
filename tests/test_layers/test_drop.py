@@ -2,7 +2,7 @@ import unittest
 from jax import random
 import numpy as np
 
-from ..drop import DropPath
+from jax_models.layers import DropPath
 
 
 class TestDropPath(unittest.TestCase):

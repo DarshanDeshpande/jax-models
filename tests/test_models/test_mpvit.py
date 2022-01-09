@@ -3,14 +3,14 @@ import unittest
 import jax.numpy as jnp
 import jax.random as random
 
-from ..mpvit import (
+from jax_models.models.mpvit import (
     ConvolutionalStem,
     MultiScalePatchEmbedding,
     ConvolutionalLocalFeature,
     FactorizedAttention,
     MultiPathTransformerBlock,
 )
-from ..mpvit import MPViT_Tiny, MPViT_XSmall, MPViT_Small, MPViT_Base
+from jax_models.models.mpvit import MPViT_Tiny, MPViT_XSmall, MPViT_Small, MPViT_Base
 
 
 class Layer_Tests(unittest.TestCase):

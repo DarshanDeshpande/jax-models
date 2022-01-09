@@ -1,7 +1,8 @@
 import unittest
 import jax.random as random
 import jax.numpy as jnp
-from ..mlp import TransformerMLP
+
+from jax_models.layers import TransformerMLP
 
 
 class TestMLP(unittest.TestCase):

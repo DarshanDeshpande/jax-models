@@ -3,7 +3,7 @@ import unittest
 import jax.numpy as jnp
 import jax.random as random
 
-from ..conv_mixer import ConvMixer
+from jax_models.models.conv_mixer import ConvMixer
 
 
 class TestConvMixer(unittest.TestCase):

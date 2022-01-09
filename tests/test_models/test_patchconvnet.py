@@ -2,7 +2,7 @@ import unittest
 from jax import random
 import jax.numpy as jnp
 
-from ..patchconvnet import (
+from jax_models.models.patchconvnet import (
     ConvolutionalStem,
     TrunkBlock,
     AttentionPoolingBlock,

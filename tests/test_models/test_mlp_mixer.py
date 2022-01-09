@@ -3,7 +3,7 @@ import unittest
 import jax.numpy as jnp
 import jax.random as random
 
-from ..mlp_mixer import Model
+from jax_models.models.mlp_mixer import Model
 
 
 class TestMLPMixer(unittest.TestCase):

@@ -1,7 +1,8 @@
 import unittest
 import jax.random as random
 import jax.numpy as jnp
-from ..depthwise_separable_conv import DepthwiseConv2D, SeparableDepthwiseConv2D
+
+from jax_models.layers import DepthwiseConv2D, SeparableDepthwiseConv2D
 
 
 class ParameterTest(unittest.TestCase):

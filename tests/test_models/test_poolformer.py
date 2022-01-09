@@ -2,7 +2,7 @@ import unittest
 from jax import random
 import jax.numpy as jnp
 
-from ..poolformer import (
+from jax_models.models.poolformer import (
     PoolFormer_S12,
     PoolFormer_S24,
     PoolFormer_S36,
