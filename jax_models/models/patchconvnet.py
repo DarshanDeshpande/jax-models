@@ -5,6 +5,16 @@ from typing import Optional
 
 from ..layers import SqueezeAndExcitation, DropPath, TransformerMLP
 
+__all__ = [
+    "PatchConvNet",
+    "PatchConvNet_S60",
+    "PatchConvNet_S120",
+    "PatchConvNet_B60",
+    "PatchConvNet_B120",
+    "PatchConvNet_L60",
+    "PatchConvNet_L120",
+]
+
 
 class ConvolutionalStem(nn.Module):
     emb_dim: int = 768
@@ -117,7 +127,9 @@ class AttentionPoolingBlock(nn.Module):
         token = token + drop_att
 
         norm = nn.LayerNorm()(token)
-        x = TransformerMLP(dim=hidden_dim, out_dim=self.dim, dropout=self.dropout)(norm, deterministic)
+        x = TransformerMLP(dim=hidden_dim, out_dim=self.dim, dropout=self.dropout)(
+            norm, deterministic
+        )
         scaled_mlp = gamma_2 * x
         drop_mlp = DropPath(self.dropout)(scaled_mlp, deterministic=deterministic)
         token = token + drop_mlp
@@ -162,7 +174,7 @@ class PatchConvNet(nn.Module):
         return x
 
 
-def PatchConvNet_S60(attach_head=True, num_classes=1000, dropout=0.1):
+def PatchConvNet_S60(attach_head=True, num_classes=1000, dropout=0.1, **kwargs):
     model = PatchConvNet(
         depth=60,
         dim=384,
@@ -170,11 +182,12 @@ def PatchConvNet_S60(attach_head=True, num_classes=1000, dropout=0.1):
         mlp_ratio=3,
         attach_head=attach_head,
         num_classes=num_classes,
+        **kwargs
     )
     return model
 
 
-def PatchConvNet_S120(attach_head=True, num_classes=1000, dropout=0.1):
+def PatchConvNet_S120(attach_head=True, num_classes=1000, dropout=0.1, **kwargs):
     model = PatchConvNet(
         depth=120,
         dim=384,
@@ -182,11 +195,12 @@ def PatchConvNet_S120(attach_head=True, num_classes=1000, dropout=0.1):
         mlp_ratio=3,
         attach_head=attach_head,
         num_classes=num_classes,
+        **kwargs
     )
     return model
 
 
-def PatchConvNet_B60(attach_head=True, num_classes=1000, dropout=0.1):
+def PatchConvNet_B60(attach_head=True, num_classes=1000, dropout=0.1, **kwargs):
     model = PatchConvNet(
         depth=60,
         dim=768,
@@ -194,11 +208,12 @@ def PatchConvNet_B60(attach_head=True, num_classes=1000, dropout=0.1):
         mlp_ratio=4,
         attach_head=attach_head,
         num_classes=num_classes,
+        **kwargs
     )
     return model
 
 
-def PatchConvNet_B120(attach_head=True, num_classes=1000, dropout=0.1):
+def PatchConvNet_B120(attach_head=True, num_classes=1000, dropout=0.1, **kwargs):
     model = PatchConvNet(
         depth=120,
         dim=768,
@@ -206,11 +221,12 @@ def PatchConvNet_B120(attach_head=True, num_classes=1000, dropout=0.1):
         mlp_ratio=4,
         attach_head=attach_head,
         num_classes=num_classes,
+        **kwargs
     )
     return model
 
 
-def PatchConvNet_L60(attach_head=True, num_classes=1000, dropout=0.1):
+def PatchConvNet_L60(attach_head=True, num_classes=1000, dropout=0.1, **kwargs):
     model = PatchConvNet(
         depth=60,
         dim=1024,
@@ -218,11 +234,12 @@ def PatchConvNet_L60(attach_head=True, num_classes=1000, dropout=0.1):
         mlp_ratio=3,
         attach_head=attach_head,
         num_classes=num_classes,
+        **kwargs
     )
     return model
 
 
-def PatchConvNet_L120(attach_head=True, num_classes=1000, dropout=0.1):
+def PatchConvNet_L120(attach_head=True, num_classes=1000, dropout=0.1, **kwargs):
     model = PatchConvNet(
         depth=120,
         dim=1024,
@@ -230,5 +247,6 @@ def PatchConvNet_L120(attach_head=True, num_classes=1000, dropout=0.1):
         mlp_ratio=3,
         attach_head=attach_head,
         num_classes=num_classes,
+        **kwargs
     )
     return model

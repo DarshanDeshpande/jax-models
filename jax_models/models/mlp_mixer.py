@@ -4,6 +4,16 @@ import flax.linen as nn
 from ..layers import TransformerMLP
 from typing import Optional
 
+__all__ = [
+    "MLPMixer",
+    "MLPMixer_S16",
+    "MLPMixer_S32",
+    "MLPMixer_B32",
+    "MLPMixer_L16",
+    "MLPMixer_L32",
+    "MLPMixer_H14",
+]
+
 
 class MixerLayer(nn.Module):
     channels_dim: int = 256
@@ -34,7 +44,7 @@ class MixerLayer(nn.Module):
         return skip
 
 
-class Model(nn.Module):
+class MLPMixer(nn.Module):
     patch_size: int = 32
     num_mixers_layers: int = 2
     hidden_size: int = 768
@@ -70,25 +80,25 @@ class Model(nn.Module):
         return x
 
 
-def MLPMixer_S32(attach_head=False, num_classes=1000, dropout=0.2):
-    return Model(32, 8, 512, 2048, 256, dropout, attach_head, num_classes)
+def MLPMixer_S32(attach_head=False, num_classes=1000, dropout=0.2, **kwargs):
+    return MLPMixer(32, 8, 512, 2048, 256, dropout, attach_head, num_classes, **kwargs)
 
 
-def MLPMixer_S16(attach_head=False, num_classes=1000, dropout=0.2):
-    return Model(16, 8, 512, 2048, 256, dropout, attach_head, num_classes)
+def MLPMixer_S16(attach_head=False, num_classes=1000, dropout=0.2, **kwargs):
+    return MLPMixer(16, 8, 512, 2048, 256, dropout, attach_head, num_classes, **kwargs)
 
 
-def MLPMixer_B32(attach_head=False, num_classes=1000, dropout=0.2):
-    return Model(32, 12, 768, 3072, 384, dropout, attach_head, num_classes)
+def MLPMixer_B32(attach_head=False, num_classes=1000, dropout=0.2, **kwargs):
+    return MLPMixer(32, 12, 768, 3072, 384, dropout, attach_head, num_classes, **kwargs)
 
 
-def MLPMixer_L32(attach_head=False, num_classes=1000, dropout=0.2):
-    return Model(32, 24, 1024, 4096, 512, dropout, attach_head, num_classes)
+def MLPMixer_L32(attach_head=False, num_classes=1000, dropout=0.2, **kwargs):
+    return MLPMixer(32, 24, 1024, 4096, 512, dropout, attach_head, num_classes, **kwargs)
 
 
-def MLPMixer_L16(attach_head=False, num_classes=1000, dropout=0.2):
-    return Model(16, 24, 1024, 4096, 512, dropout, attach_head, num_classes)
+def MLPMixer_L16(attach_head=False, num_classes=1000, dropout=0.2, **kwargs):
+    return MLPMixer(16, 24, 1024, 4096, 512, dropout, attach_head, num_classes, **kwargs)
 
 
-def MLPMixer_H14(attach_head=False, num_classes=1000, dropout=0.2):
-    return Model(14, 32, 1280, 5120, 640, dropout, attach_head, num_classes)
+def MLPMixer_H14(attach_head=False, num_classes=1000, dropout=0.2, **kwargs):
+    return MLPMixer(14, 32, 1280, 5120, 640, dropout, attach_head, num_classes, **kwargs)

@@ -4,6 +4,14 @@ import jax.numpy as jnp
 from typing import Optional
 from ..layers import TransformerMLP
 
+__all__ = [
+    "PoolFormer_S12",
+    "PoolFormer_S24",
+    "PoolFormer_S36",
+    "PoolFormer_M36",
+    "PoolFormer_M48",
+]
+
 
 class TransformerEncoder(nn.Module):
     mlp_dim: int
@@ -18,7 +26,7 @@ class TransformerEncoder(nn.Module):
         deterministic = nn.merge_param(
             "deterministic", self.deterministic, deterministic
         )
-        
+
         norm = nn.LayerNorm()(inputs)
         att = nn.avg_pool(
             norm,
@@ -267,21 +275,21 @@ class M48(nn.Module):
         return x
 
 
-def PoolFormer_S12(attach_head=False, num_classes=1000, dropout=0.1):
-    return S12(attach_head, num_classes, dropout)
+def PoolFormer_S12(attach_head=False, num_classes=1000, dropout=0.1, **kwargs):
+    return S12(attach_head, num_classes, dropout, **kwargs)
 
 
-def PoolFormer_S24(attach_head=False, num_classes=1000, dropout=0.1):
-    return S24(attach_head, num_classes, dropout)
+def PoolFormer_S24(attach_head=False, num_classes=1000, dropout=0.1, **kwargs):
+    return S24(attach_head, num_classes, dropout, **kwargs)
 
 
-def PoolFormer_S36(attach_head=False, num_classes=1000, dropout=0.1):
-    return S36(attach_head, num_classes, dropout)
+def PoolFormer_S36(attach_head=False, num_classes=1000, dropout=0.1, **kwargs):
+    return S36(attach_head, num_classes, dropout, **kwargs)
 
 
-def PoolFormer_M36(attach_head=False, num_classes=1000, dropout=0.1):
-    return M36(attach_head, num_classes, dropout)
+def PoolFormer_M36(attach_head=False, num_classes=1000, dropout=0.1, **kwargs):
+    return M36(attach_head, num_classes, dropout, **kwargs)
 
 
-def PoolFormer_M48(attach_head=False, num_classes=1000, dropout=0.1):
-    return M48(attach_head, num_classes, dropout)
+def PoolFormer_M48(attach_head=False, num_classes=1000, dropout=0.1, **kwargs):
+    return M48(attach_head, num_classes, dropout, **kwargs)

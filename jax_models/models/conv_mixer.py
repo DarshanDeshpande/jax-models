@@ -4,6 +4,14 @@ import flax.linen as nn
 from typing import Optional
 from ..layers import DepthwiseConv2D
 
+__all__ = [
+    "ConvMixer",
+    "ConvMixer_512_12",
+    "ConvMixer_768_32",
+    "ConvMixer_1024_20",
+    "ConvMixer_1536_20",
+]
+
 
 class ConvMixerLayer(nn.Module):
     features: int = 256
@@ -53,17 +61,17 @@ class ConvMixer(nn.Module):
         return x
 
 
-def ConvMixer_1536_20(attach_head=False, num_classes=1000, dropout=None):
-    return ConvMixer(1536, 7, 20, 9, attach_head, num_classes)
+def ConvMixer_1536_20(attach_head=False, num_classes=1000, dropout=None, **kwargs):
+    return ConvMixer(1536, 7, 20, 9, attach_head, num_classes, **kwargs)
 
 
-def ConvMixer_768_32(attach_head=False, num_classes=1000, dropout=None):
-    return ConvMixer(768, 7, 32, 7, attach_head, num_classes)
+def ConvMixer_768_32(attach_head=False, num_classes=1000, dropout=None, **kwargs):
+    return ConvMixer(768, 7, 32, 7, attach_head, num_classes, **kwargs)
 
 
-def ConvMixer_512_12(attach_head=False, num_classes=1000, dropout=None):
-    return ConvMixer(512, 7, 12, 8, attach_head, num_classes)
+def ConvMixer_512_12(attach_head=False, num_classes=1000, dropout=None, **kwargs):
+    return ConvMixer(512, 7, 12, 8, attach_head, num_classes, **kwargs)
 
 
-def ConvMixer_1024_20(attach_head=False, num_classes=1000, dropout=None):
-    return ConvMixer(1024, 14, 20, 9, attach_head, num_classes)
+def ConvMixer_1024_20(attach_head=False, num_classes=1000, dropout=None, **kwargs):
+    return ConvMixer(1024, 14, 20, 9, attach_head, num_classes, **kwargs)

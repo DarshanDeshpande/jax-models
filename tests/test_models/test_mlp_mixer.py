@@ -3,13 +3,13 @@ import unittest
 import jax.numpy as jnp
 import jax.random as random
 
-from jax_models.models.mlp_mixer import Model
+from jax_models.models.mlp_mixer import MLPMixer
 
 
 class TestMLPMixer(unittest.TestCase):
     def test_output_shape(self):
         key, drop = random.split(random.PRNGKey(0), 2)
-        model = Model(
+        model = MLPMixer(
             patch_size=32,
             num_mixers_layers=2,
             hidden_size=768,

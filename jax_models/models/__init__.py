@@ -3,4 +3,5 @@ from . import patchconvnet
 from . import mpvit
 from . import mlp_mixer
 from . import conv_mixer
-from .model_registry import list_models
+from . import segformer
+from .model_registry import list_models, load_model
