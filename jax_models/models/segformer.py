@@ -346,16 +346,12 @@ def SegFormer_B0(
         attach_head=attach_head,
         num_classes=num_classes,
         decoder_emb=256,
-        **kwargs
+        **kwargs,
     )
 
 
 def SegFormer_B1(
-    attach_head=False,
-    num_classes=19,
-    dropout=0.0,
-    drop_path=0.1,
-    **kwargs
+    attach_head=False, num_classes=19, dropout=0.0, drop_path=0.1, **kwargs
 ):
     return SegFormer(
         4,
@@ -369,16 +365,12 @@ def SegFormer_B1(
         attach_head=attach_head,
         num_classes=num_classes,
         decoder_emb=256,
-        **kwargs
+        **kwargs,
     )
 
 
 def SegFormer_B2(
-    attach_head=False,
-    num_classes=19,
-    dropout=0.0,
-    drop_path=0.1,
-    **kwargs
+    attach_head=False, num_classes=19, dropout=0.0, drop_path=0.1, **kwargs
 ):
     return SegFormer(
         4,
@@ -392,16 +384,12 @@ def SegFormer_B2(
         attach_head=attach_head,
         num_classes=num_classes,
         decoder_emb=768,
-        **kwargs
+        **kwargs,
     )
 
 
 def SegFormer_B3(
-    attach_head=False,
-    num_classes=19,
-    dropout=0.0,
-    drop_path=0.1,
-    **kwargs
+    attach_head=False, num_classes=19, dropout=0.0, drop_path=0.1, **kwargs
 ):
     return SegFormer(
         4,
@@ -415,16 +403,12 @@ def SegFormer_B3(
         attach_head=attach_head,
         num_classes=num_classes,
         decoder_emb=768,
-        **kwargs
+        **kwargs,
     )
 
 
 def SegFormer_B4(
-    attach_head=False,
-    num_classes=19,
-    dropout=0.0,
-    drop_path=0.1,
-    **kwargs
+    attach_head=False, num_classes=19, dropout=0.0, drop_path=0.1, **kwargs
 ):
     return SegFormer(
         4,
@@ -438,16 +422,12 @@ def SegFormer_B4(
         attach_head=attach_head,
         num_classes=num_classes,
         decoder_emb=768,
-        **kwargs
+        **kwargs,
     )
 
 
 def SegFormer_B5(
-    attach_head=False,
-    num_classes=19,
-    dropout=0.0,
-    drop_path=0.1,
-    **kwargs
+    attach_head=False, num_classes=19, dropout=0.0, drop_path=0.1, **kwargs
 ):
     return SegFormer(
         4,
@@ -461,5 +441,5 @@ def SegFormer_B5(
         attach_head=attach_head,
         num_classes=num_classes,
         decoder_emb=768,
-        **kwargs
+        **kwargs,
     )

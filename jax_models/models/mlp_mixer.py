@@ -93,12 +93,18 @@ def MLPMixer_B32(attach_head=False, num_classes=1000, dropout=0.2, **kwargs):
 
 
 def MLPMixer_L32(attach_head=False, num_classes=1000, dropout=0.2, **kwargs):
-    return MLPMixer(32, 24, 1024, 4096, 512, dropout, attach_head, num_classes, **kwargs)
+    return MLPMixer(
+        32, 24, 1024, 4096, 512, dropout, attach_head, num_classes, **kwargs
+    )
 
 
 def MLPMixer_L16(attach_head=False, num_classes=1000, dropout=0.2, **kwargs):
-    return MLPMixer(16, 24, 1024, 4096, 512, dropout, attach_head, num_classes, **kwargs)
+    return MLPMixer(
+        16, 24, 1024, 4096, 512, dropout, attach_head, num_classes, **kwargs
+    )
 
 
 def MLPMixer_H14(attach_head=False, num_classes=1000, dropout=0.2, **kwargs):
-    return MLPMixer(14, 32, 1280, 5120, 640, dropout, attach_head, num_classes, **kwargs)
+    return MLPMixer(
+        14, 32, 1280, 5120, 640, dropout, attach_head, num_classes, **kwargs
+    )

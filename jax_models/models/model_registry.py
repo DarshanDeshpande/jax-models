@@ -4,6 +4,7 @@ from .mpvit import *
 from .patchconvnet import *
 from .poolformer import *
 from .segformer import *
+from .convnext import *
 
 
 model_dict = {
@@ -38,6 +39,11 @@ model_dict = {
     "segformer-b3": SegFormer_B3,
     "segformer-b4": SegFormer_B4,
     "segformer-b5": SegFormer_B5,
+    "convnext-tiny": ConvNeXt_Tiny,
+    "convnext-small": ConvNeXt_Small,
+    "convnext-base": ConvNeXt_Base,
+    "convnext-large": ConvNeXt_Large,
+    "convnext-xlarge": ConvNeXt_XLarge,
 }
 
 

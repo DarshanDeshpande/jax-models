@@ -44,7 +44,8 @@ Available model implementations for JAX are:
 3. <a href="https://arxiv.org/abs/2112.11010">MPViT : Multi-Path Vision Transformer for Dense Prediction</a> (Youngwan Lee et al., 2021)
 4. <a href="https://arxiv.org/abs/2105.01601v1">MLP-Mixer: An all-MLP Architecture for Vision</a> (Ilya Tolstikhin et al., 2021)
 5. <a href="https://openreview.net/pdf?id=TVHS5Y4dNvM">Patches Are All You Need</a> (Anonymous et al., 2021)
-6. <a href="https://arxiv.org/abs/2105.15203">SegFormer: Simple and Efficient Design for Semantic Segmentation with Transformers</a> (Enze Xie, et al., 2021)
+6. <a href="https://arxiv.org/abs/2105.15203">SegFormer: Simple and Efficient Design for Semantic Segmentation with Transformers</a> (Enze Xie et al., 2021)
+7. <a href="https://arxiv.org/abs/2201.03545">A ConvNet for the 2020s</a> (Zhuang Liu et al., 2021)
 
 <br>
 Available layers for out-of-the-box integration:
@@ -91,7 +92,7 @@ To load your desired model:
 
 ```py
 from jax_models.models.model_registry import load_model
-load_model('mpvit-base', attach_head=True, num_classes=1000)
+load_model('mpvit-base', attach_head=True, num_classes=1000, dropout=0.1)
 ```
 
 <!-- CONTRIBUTING -->

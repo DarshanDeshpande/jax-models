@@ -381,7 +381,7 @@ def MPViT_Tiny(attach_head=True, num_classes=1000, dropout=0.1, **kwargs):
         num_classes=num_classes,
         att_drop=dropout,
         proj_drop=dropout,
-        **kwargs
+        **kwargs,
     )
 
 
@@ -394,7 +394,7 @@ def MPViT_XSmall(attach_head=True, num_classes=1000, dropout=0.1, **kwargs):
         num_classes=num_classes,
         att_drop=dropout,
         proj_drop=dropout,
-        **kwargs
+        **kwargs,
     )
 
 
@@ -407,7 +407,7 @@ def MPViT_Small(attach_head=True, num_classes=1000, dropout=0.1, **kwargs):
         num_classes=num_classes,
         att_drop=dropout,
         proj_drop=dropout,
-        **kwargs
+        **kwargs,
     )
 
 
@@ -420,5 +420,5 @@ def MPViT_Base(attach_head=True, num_classes=1000, dropout=0.1, **kwargs):
         num_classes=num_classes,
         att_drop=dropout,
         proj_drop=dropout,
-        **kwargs
+        **kwargs,
     )
