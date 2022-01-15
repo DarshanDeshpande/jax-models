@@ -29,7 +29,7 @@ class LayerTests(unittest.TestCase):
         params, key = random.split(random.PRNGKey(0), 2)
         attblock = AttentionPoolingBlock(768, 4)
         arr = jnp.zeros([1, 196, 768])
-        cls_token = jnp.zeros((1, 1, 768))
+        cls_token = jnp.zeros([1, 1, 768])
         params = attblock.init(
             {"params": params, "dropout": key}, [arr, cls_token], True
         )["params"]

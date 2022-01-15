@@ -46,6 +46,7 @@ Available model implementations for JAX are:
 5. <a href="https://openreview.net/pdf?id=TVHS5Y4dNvM">Patches Are All You Need</a> (Anonymous et al., 2021)
 6. <a href="https://arxiv.org/abs/2105.15203">SegFormer: Simple and Efficient Design for Semantic Segmentation with Transformers</a> (Enze Xie et al., 2021)
 7. <a href="https://arxiv.org/abs/2201.03545">A ConvNet for the 2020s</a> (Zhuang Liu et al., 2021)
+8. <a href="https://arxiv.org/abs/2111.06377v1">Masked Autoencoders Are Scalable Vision Learners</a> (Kaiming He et al., 2021)
 
 <br>
 Available layers for out-of-the-box integration:

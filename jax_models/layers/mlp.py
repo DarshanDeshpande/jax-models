@@ -2,7 +2,7 @@ import jax.numpy as jnp
 import flax.linen as nn
 
 from ..layers import DepthwiseConv2D
-from typing import Optional
+from typing import Optional, Callable
 
 
 class TransformerMLP(nn.Module):
@@ -10,6 +10,7 @@ class TransformerMLP(nn.Module):
     out_dim: int = 256
     dropout: float = 0.2
     use_dwconv: bool = False
+    kernel_init: Callable = nn.initializers.xavier_uniform()
     deterministic: Optional[bool] = None
 
     @nn.compact
@@ -17,7 +18,7 @@ class TransformerMLP(nn.Module):
         deterministic = nn.merge_param(
             "deterministic", self.deterministic, deterministic
         )
-        x = nn.Dense(self.dim)(inputs)
+        x = nn.Dense(self.dim, kernel_init=self.kernel_init)(inputs)
 
         if self.use_dwconv:
             batch, n, channels = x.shape
@@ -28,6 +29,7 @@ class TransformerMLP(nn.Module):
 
         x = nn.gelu(x)
         x = nn.Dropout(self.dropout)(x, deterministic)
-        x = nn.Dense(self.out_dim)(x)
+        x = nn.Dense(self.out_dim, kernel_init=self.kernel_init)(x)
         x = nn.Dropout(self.dropout)(x, deterministic)
+
         return x

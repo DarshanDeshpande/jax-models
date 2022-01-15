@@ -177,7 +177,7 @@ class ConvRelPosEnc(nn.Module):
         )
 
         EV_hat_img = q_img * conv_v_img
-        zero = jnp.zeros((batch, num_heads, 1, channels_per_head))
+        zero = jnp.zeros([batch, num_heads, 1, channels_per_head])
         EV_hat = jnp.concatenate((zero, EV_hat_img), axis=2)
         return EV_hat
 

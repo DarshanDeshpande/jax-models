@@ -5,6 +5,7 @@ from .patchconvnet import *
 from .poolformer import *
 from .segformer import *
 from .convnext import *
+from .masked_autoencoder import *
 
 
 model_dict = {
@@ -44,6 +45,9 @@ model_dict = {
     "convnext-base": ConvNeXt_Base,
     "convnext-large": ConvNeXt_Large,
     "convnext-xlarge": ConvNeXt_XLarge,
+    "mae-base": MAE_Base,
+    "mae-large": MAE_Large,
+    "mae-huge": MAE_Huge,
 }
 
 
