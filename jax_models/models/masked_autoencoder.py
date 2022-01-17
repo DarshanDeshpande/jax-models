@@ -5,7 +5,7 @@ A major part of this code is translated from https://github.com/facebookresearch
 import jax.numpy as jnp
 
 import flax.linen as nn
-from ..layers import Attention, DropPath, TransformerMLP, Mask
+from ..layers import Attention, DropPath, TransformerMLP, Mask, PatchEmbed
 from typing import Optional
 import logging
 
@@ -25,7 +25,7 @@ def sincosemb1d(emb_dim, pos):
     return jnp.concatenate([jnp.sin(out), jnp.cos(out)], axis=1)
 
 
-def sincosposemb(key, emb_dim, grid_size):
+def sincosposemb(emb_dim, grid_size):
     grid_h = jnp.arange(grid_size, dtype=jnp.float32)
     grid_w = jnp.arange(grid_size, dtype=jnp.float32)
     grid = jnp.meshgrid(grid_w, grid_h)
@@ -41,23 +41,6 @@ def sincosposemb(key, emb_dim, grid_size):
 
 pos_emb_init = sincosposemb
 emb_init = nn.initializers.normal(stddev=0.02)
-
-
-class PatchEmbed(nn.Module):
-    patch_size: int = 16
-    emb_dim: int = 768
-
-    @nn.compact
-    def __call__(self, inputs):
-        batch, height, width, channels = inputs.shape
-        x = nn.Conv(
-            self.emb_dim,
-            (self.patch_size, self.patch_size),
-            self.patch_size,
-            kernel_init=nn.initializers.xavier_uniform(),
-        )(inputs)
-        x = jnp.reshape(x, (batch, -1, self.emb_dim))
-        return x
 
 
 class Block(nn.Module):
@@ -108,17 +91,22 @@ class Encoder(nn.Module):
             "deterministic", self.deterministic, deterministic
         )
 
-        patch_embed = PatchEmbed(self.patch_size, self.emb_dim)(patches)
+        patch_embed = PatchEmbed(self.patch_size, self.emb_dim, use_norm=False)(patches)
         num_patches = patch_embed.shape[1]
 
-        pos_emb = self.param(
-            "pos_emb", pos_emb_init, self.emb_dim, int(num_patches ** 0.5)
+        pos_emb = self.variable(
+            "pos_emb",
+            "enc_pos_emb",
+            pos_emb_init,
+            self.emb_dim,
+            int(num_patches ** 0.5),
         )
-        x = patch_embed + pos_emb[:, 1:, :]
+
+        x = patch_embed + pos_emb.value[:, 1:, :]
         x, mask, ids_restore = Mask()(x, self.mask_ratio)
 
         cls_token = self.param("cls_token", emb_init, (1, 1, self.emb_dim))
-        cls_token = cls_token + pos_emb[:, :1, :]
+        cls_token = cls_token + pos_emb.value[:, :1, :]
         cls_token = jnp.broadcast_to(
             cls_token, (x.shape[0], cls_token.shape[1], cls_token.shape[2])
         )
@@ -170,11 +158,15 @@ class Decoder(nn.Module):
         )
         x = jnp.concatenate([x[:, :1, :], x_], axis=1)
 
-        decoder_pos_emb = self.param(
-            "dec_pos_emb", pos_emb_init, self.dec_emb_dim, int(self.num_patches ** 0.5)
+        decoder_pos_emb = self.variable(
+            "pos_emb",
+            "dec_pos_emb",
+            pos_emb_init,
+            self.dec_emb_dim,
+            int(self.num_patches ** 0.5),
         )
 
-        x = x + decoder_pos_emb
+        x = x + decoder_pos_emb.value
 
         for _ in range(self.dec_depth):
             x = Block(

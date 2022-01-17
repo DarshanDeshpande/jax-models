@@ -26,6 +26,7 @@ class TestMAE(unittest.TestCase):
             x,
             False,
             rngs={"noise": rng2, "drop_path": rng3, "dropout": rng4},
+            mutable=["pos_emb"],
         )
-        self.assertEqual(out[0].shape, (1, 16, 768))
-        self.assertEqual(out[1].shape, (1, 16))
+        self.assertEqual(out[0][0].shape, (1, 16, 768))
+        self.assertEqual(out[0][1].shape, (1, 16))

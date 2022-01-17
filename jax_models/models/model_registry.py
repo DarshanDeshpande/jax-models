@@ -6,6 +6,7 @@ from .poolformer import *
 from .segformer import *
 from .convnext import *
 from .masked_autoencoder import *
+from .swin_transformer import *
 
 
 model_dict = {
@@ -48,6 +49,12 @@ model_dict = {
     "mae-base": MAE_Base,
     "mae-large": MAE_Large,
     "mae-huge": MAE_Huge,
+    "swin-tiny-224": SwinTiny224,
+    "swin-small-224": SwinSmall224,
+    "swin-base-224": SwinBase224,
+    "swin-base-384": SwinBase384,
+    "swin-large-224": SwinLarge224,
+    "swin-large-384": SwinLarge384,
 }
 
 
@@ -56,6 +63,6 @@ def list_models():
 
 
 def load_model(
-    model_str="", attach_head=False, num_classes=1000, dropout=0.1, **kwargs
+    model_str="", attach_head=False, num_classes=1000, dropout=0.0, **kwargs
 ):
     return model_dict[model_str](attach_head, num_classes, dropout=dropout, **kwargs)
