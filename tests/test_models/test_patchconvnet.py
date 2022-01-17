@@ -45,7 +45,7 @@ class PatchConvNetTest(unittest.TestCase):
         rng1, rng2, rng3 = random.split(random.PRNGKey(0), 3)
         num_classes = 100
         model = PatchConvNet(
-            attach_head=True, out_classes=num_classes, depth=1, dim=384, dropout=0.3
+            attach_head=True, num_classes=num_classes, depth=1, dim=384, dropout=0.3
         )
         x = jnp.zeros([1, 224, 224, 3])
         params = model.init(

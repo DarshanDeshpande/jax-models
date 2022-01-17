@@ -9,8 +9,8 @@ with open(path.join(current_path, "README.md"), encoding="utf-8") as f:
 
 setup(
     name="jax_models",
-    version="0.0.2",
-    description="Unofficial JAX implementation of Deep Learning models",
+    version="0.0.3",
+    description="Unofficial JAX implementations of deep learning research papers",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/darshandeshpande/jax-models",
@@ -31,7 +31,7 @@ setup(
         "Topic :: Software Development :: Libraries",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
-    keywords="jax flax models",
+    keywords="jax flax models computer-vision deep-learning transformers",
     packages=["jax_models"],
     package_data={"jax_models": ["*/*"]},
     include_package_data=True,

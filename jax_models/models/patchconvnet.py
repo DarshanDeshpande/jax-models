@@ -143,7 +143,7 @@ class PatchConvNet(nn.Module):
     dropout: float = 0.5
     mlp_ratio: int = 4
     attach_head: bool = True
-    out_classes: int = 1000
+    num_classes: int = 1000
     deterministic: Optional[bool] = None
 
     @nn.compact
@@ -169,7 +169,7 @@ class PatchConvNet(nn.Module):
         x = nn.LayerNorm()(x)
         x = x[:, 0]
         if self.attach_head:
-            x = nn.Dense(self.out_classes)(x)
+            x = nn.Dense(self.num_classes)(x)
             x = nn.softmax(x)
         return x
 
