@@ -73,9 +73,9 @@ class WindowAttention(nn.Module):
         relative_indices = flatten_indices[:, :, None] - flatten_indices[:, None, :]
         relative_indices = jnp.transpose(relative_indices, (1, 2, 0))
 
-        relative_indices.at[:, :, 0].add(self.window_size[0] - 1)
-        relative_indices.at[:, :, 1].add(self.window_size[1] - 1)
-        relative_indices.at[:, :, 0].mul(2 * self.window_size[1] - 1)
+        relative_indices = relative_indices.at[:, :, 0].add(self.window_size[0] - 1)
+        relative_indices = relative_indices.at[:, :, 1].add(self.window_size[1] - 1)
+        relative_indices = relative_indices.at[:, :, 0].mul(2 * self.window_size[1] - 1)
         relative_pos_index = jnp.sum(relative_indices, -1)
         return relative_pos_index
 
@@ -168,7 +168,7 @@ class SwinBlock(nn.Module):
             count = 0
             for h in h_slices:
                 for w in w_slices:
-                    mask.at[:, h, w, :].set(count)
+                    mask = mask.at[:, h, w, :].set(count)
                     count += 1
 
             mask_windows = window_partition(mask, window_size)
@@ -176,8 +176,8 @@ class SwinBlock(nn.Module):
             att_mask = jnp.expand_dims(mask_windows, 1) - jnp.expand_dims(
                 mask_windows, 2
             )
-            att_mask = jnp.where(att_mask != 0, att_mask, float(-100.0))
-            att_mask = jnp.where(att_mask == 0, att_mask, float(0.0))
+            att_mask = jnp.where(att_mask != 0., float(-100.0), att_mask)
+            att_mask = jnp.where(att_mask == 0., float(0.0), att_mask)
 
         else:
             att_mask = None
