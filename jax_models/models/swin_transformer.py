@@ -68,14 +68,15 @@ class WindowAttention(nn.Module):
     def get_rel_pos_index(self):
         h_indices = jnp.arange(0, self.window_size[0])
         w_indices = jnp.arange(0, self.window_size[1])
-        indices = jnp.stack(jnp.meshgrid(h_indices, w_indices))
+        indices = jnp.stack(jnp.meshgrid(w_indices, h_indices, indexing="ij"))
         flatten_indices = jnp.reshape(indices, (2, -1))
         relative_indices = flatten_indices[:, :, None] - flatten_indices[:, None, :]
         relative_indices = jnp.transpose(relative_indices, (1, 2, 0))
-
         relative_indices = relative_indices.at[:, :, 0].add(self.window_size[0] - 1)
         relative_indices = relative_indices.at[:, :, 1].add(self.window_size[1] - 1)
-        relative_indices = relative_indices.at[:, :, 0].mul(2 * self.window_size[1] - 1)
+        relative_indices = relative_indices.at[:, :, 0].multiply(
+            2 * self.window_size[1] - 1
+        )
         relative_pos_index = jnp.sum(relative_indices, -1)
         return relative_pos_index
 
@@ -87,7 +88,7 @@ class WindowAttention(nn.Module):
         )
 
         rpbt = self.param(
-            "rel_pos_bias_table",
+            "relative_position_bias_table",
             nn.initializers.normal(0.02),
             (
                 (2 * self.window_size[0] - 1) * (2 * self.window_size[1] - 1),
@@ -96,11 +97,11 @@ class WindowAttention(nn.Module):
         )
 
         relative_pos_index = self.variable(
-            "rel_pos_index", "rel_pos_index", self.get_rel_pos_index
+            "relative_position_index", "relative_position_index", self.get_rel_pos_index
         )
 
         batch, n, channels = inputs.shape
-        qkv = nn.Dense(self.dim * 3, use_bias=self.use_bias)(inputs)
+        qkv = nn.Dense(self.dim * 3, use_bias=self.use_bias, name="qkv")(inputs)
         qkv = qkv.reshape(batch, n, 3, self.num_heads, channels // self.num_heads)
         qkv = jnp.transpose(qkv, (2, 0, 3, 1, 4))
         q, k, v = qkv[0], qkv[1], qkv[2]
@@ -133,7 +134,7 @@ class WindowAttention(nn.Module):
         att = nn.Dropout(self.att_drop)(att, deterministic)
 
         x = jnp.reshape(jnp.swapaxes(att @ v, 1, 2), (batch, n, channels))
-        x = nn.Dense(self.dim)(x)
+        x = nn.Dense(self.dim, name="proj")(x)
         x = nn.Dropout(self.proj_drop)(x, deterministic)
         return x
 
@@ -176,12 +177,13 @@ class SwinBlock(nn.Module):
             att_mask = jnp.expand_dims(mask_windows, 1) - jnp.expand_dims(
                 mask_windows, 2
             )
-            att_mask = jnp.where(att_mask != 0., float(-100.0), att_mask)
-            att_mask = jnp.where(att_mask == 0., float(0.0), att_mask)
+            att_mask = jnp.where(att_mask != 0.0, float(-100.0), att_mask)
+            att_mask = jnp.where(att_mask == 0.0, float(0.0), att_mask)
 
         else:
             att_mask = None
-            return att_mask
+
+        return att_mask
 
     @nn.compact
     def __call__(self, inputs, deterministic=None):
@@ -215,11 +217,15 @@ class SwinBlock(nn.Module):
         assert length == height * width
 
         residual = inputs
-        x = nn.LayerNorm()(inputs)
+        x = nn.LayerNorm(name="norm1", epsilon=1e-5)(inputs)
         x = jnp.reshape(x, (batch, height, width, channels))
 
         if shift_size > 0:
-            shifted_x = jnp.roll(x, (-shift_size, -shift_size), axis=(1, 2))
+            shifted_x = jnp.roll(
+                x,
+                (-shift_size, -shift_size),
+                axis=(1, 2),
+            )
         else:
             shifted_x = x
 
@@ -233,6 +239,7 @@ class SwinBlock(nn.Module):
             self.use_att_bias,
             self.att_dropout,
             self.dropout,
+            name="attn",
         )(x_windows, att_mask.value, deterministic)
 
         att_windows = jnp.reshape(att_windows, (-1, window_size, window_size, channels))
@@ -246,8 +253,10 @@ class SwinBlock(nn.Module):
         x = jnp.reshape(x, (batch, height * width, channels))
 
         x = residual + DropPath(self.drop_path)(x, deterministic)
-        x = nn.LayerNorm()(x)
-        mlp = TransformerMLP(self.dim * self.mlp_ratio, self.dim)(x, deterministic)
+        norm = nn.LayerNorm(name="norm2", epsilon=1e-5)(x)
+        mlp = TransformerMLP(
+            self.dim * self.mlp_ratio, self.dim, dropout=self.dropout, name="mlp"
+        )(norm, deterministic)
         x = x + DropPath(self.drop_path)(mlp, deterministic)
 
         return x
@@ -270,8 +279,8 @@ class PatchMerging(nn.Module):
 
         x = jnp.concatenate([x0, x1, x2, x3], axis=-1)
         x = jnp.reshape(x, (batch, -1, 4 * channels))
-        x = nn.LayerNorm()(x)
-        x = nn.Dense(2 * self.dim, use_bias=False)(x)
+        x = nn.LayerNorm(name="norm", epsilon=1e-5)(x)
+        x = nn.Dense(2 * self.dim, use_bias=False, name="reduction")(x)
         return x
 
 
@@ -286,7 +295,7 @@ class SwinLayer(nn.Module):
     att_dropout: float
     drop_path: float
     depth: int
-    downsample: Optional[bool] = False
+    use_downsample: Optional[bool] = False
     deterministic: Optional[bool] = None
 
     @nn.compact
@@ -310,10 +319,11 @@ class SwinLayer(nn.Module):
                 self.drop_path[i]
                 if isinstance(self.drop_path, (list, tuple))
                 else self.drop_path,
+                name=f"blocks{i}",
             )(x, deterministic)
 
-        if self.downsample:
-            x = PatchMerging(self.inp_res, self.dim)(x)
+        if self.use_downsample:
+            x = PatchMerging(self.inp_res, self.dim, name="downsample")(x)
 
         return x
 
@@ -341,7 +351,9 @@ class SwinTransformer(nn.Module):
             "deterministic", self.deterministic, deterministic
         )
 
-        x = PatchEmbed(self.patch_size, self.emb_dim, use_norm=True)(inputs)
+        x = PatchEmbed(
+            self.patch_size, self.emb_dim, use_norm=True, name="patch_embed"
+        )(inputs)
         num_patches = x.shape[1]
         patch_grid = (
             inputs.shape[1] // self.patch_size,
@@ -374,14 +386,15 @@ class SwinTransformer(nn.Module):
                 self.drop_path,
                 self.depths[i],
                 True if i < (len(self.depths) - 1) else False,
+                name=f"layers{i}",
             )(x, deterministic)
-        x = nn.LayerNorm()(x)
+        x = nn.LayerNorm(name="norm", epsilon=1e-5)(x)
         x = AdaptiveAveragePool1D(1)(x)
-        x = jnp.reshape(x, (1, -1))
+        batch = x.shape[0]
+        x = jnp.reshape(x, (batch, -1))
 
         if self.attach_head:
-            x = nn.Dense(self.num_classes)(x)
-            x = nn.softmax(x)
+            x = nn.Dense(self.num_classes, name="head")(x)
 
         return x
 

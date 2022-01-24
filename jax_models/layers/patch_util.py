@@ -39,8 +39,9 @@ class PatchEmbed(nn.Module):
             (self.patch_size, self.patch_size),
             self.patch_size,
             kernel_init=self.kernel_init,
+            name="proj",
         )(inputs)
         x = jnp.reshape(x, (batch, -1, self.emb_dim))
         if self.use_norm:
-            x = nn.LayerNorm()(x)
+            x = nn.LayerNorm(name="norm", epsilon=1e-5)(x)
         return x

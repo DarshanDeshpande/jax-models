@@ -18,7 +18,7 @@ class TransformerMLP(nn.Module):
         deterministic = nn.merge_param(
             "deterministic", self.deterministic, deterministic
         )
-        x = nn.Dense(self.dim, kernel_init=self.kernel_init)(inputs)
+        x = nn.Dense(self.dim, kernel_init=self.kernel_init, name="fc1")(inputs)
 
         if self.use_dwconv:
             batch, n, channels = x.shape
@@ -29,7 +29,7 @@ class TransformerMLP(nn.Module):
 
         x = nn.gelu(x)
         x = nn.Dropout(self.dropout)(x, deterministic)
-        x = nn.Dense(self.out_dim, kernel_init=self.kernel_init)(x)
+        x = nn.Dense(self.out_dim, kernel_init=self.kernel_init, name="fc2")(x)
         x = nn.Dropout(self.dropout)(x, deterministic)
 
         return x
