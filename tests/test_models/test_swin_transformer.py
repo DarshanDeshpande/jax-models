@@ -42,7 +42,7 @@ class TestSwinTransformer(unittest.TestCase):
         x = jnp.zeros([1, 224, 224, 3])
         y = jnp.zeros([1, 384, 384, 3])
 
-        swin, params = SwinTiny224(pretrained=True, download_dir='weights/')
+        swin, params = SwinTiny224(pretrained=True, download_dir="weights/")
         swin.apply(
             {"params": params},
             x,
@@ -51,7 +51,7 @@ class TestSwinTransformer(unittest.TestCase):
             mutable=["attention_mask", "relative_position_index"],
         )
 
-        swin, params = SwinSmall224(pretrained=True, download_dir='weights/')
+        swin, params = SwinSmall224(pretrained=True, download_dir="weights/")
         swin.apply(
             {"params": params},
             x,
@@ -60,7 +60,7 @@ class TestSwinTransformer(unittest.TestCase):
             mutable=["attention_mask", "relative_position_index"],
         )
 
-        swin, params = SwinBase224(pretrained=True, download_dir='weights/')
+        swin, params = SwinBase224(pretrained=True, download_dir="weights/")
         swin.apply(
             {"params": params},
             x,
@@ -69,7 +69,7 @@ class TestSwinTransformer(unittest.TestCase):
             mutable=["attention_mask", "relative_position_index"],
         )
 
-        swin, params = SwinBase384(pretrained=True, download_dir='weights/')
+        swin, params = SwinBase384(pretrained=True, download_dir="weights/")
         swin.apply(
             {"params": params},
             y,
@@ -78,7 +78,7 @@ class TestSwinTransformer(unittest.TestCase):
             mutable=["attention_mask", "relative_position_index"],
         )
 
-        swin, params = SwinLarge224(pretrained=True, download_dir='weights/')
+        swin, params = SwinLarge224(pretrained=True, download_dir="weights/")
         swin.apply(
             {"params": params},
             x,
@@ -87,7 +87,7 @@ class TestSwinTransformer(unittest.TestCase):
             mutable=["attention_mask", "relative_position_index"],
         )
 
-        swin, params = SwinLarge384(pretrained=True, download_dir='weights/')
+        swin, params = SwinLarge384(pretrained=True, download_dir="weights/")
         swin.apply(
             {"params": params},
             y,
