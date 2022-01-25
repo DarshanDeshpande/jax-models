@@ -97,7 +97,14 @@ class ConvNeXt(nn.Module):
         return x
 
 
-def ConvNeXt_Tiny(attach_head=False, num_classes=1000, dropout=0.1, **kwargs):
+def ConvNeXt_Tiny(
+    attach_head=False,
+    num_classes=1000,
+    dropout=0.1,
+    pretrained=False,
+    download_dir=None,
+    **kwargs
+):
     return ConvNeXt(
         depths=(3, 3, 9, 3),
         dims=(96, 192, 384, 768),
@@ -108,7 +115,14 @@ def ConvNeXt_Tiny(attach_head=False, num_classes=1000, dropout=0.1, **kwargs):
     )
 
 
-def ConvNeXt_Small(attach_head=False, num_classes=1000, dropout=0.1, **kwargs):
+def ConvNeXt_Small(
+    attach_head=False,
+    num_classes=1000,
+    dropout=0.1,
+    pretrained=False,
+    download_dir=None,
+    **kwargs
+):
     return ConvNeXt(
         depths=(3, 3, 27, 3),
         dims=(96, 192, 384, 768),
@@ -119,7 +133,14 @@ def ConvNeXt_Small(attach_head=False, num_classes=1000, dropout=0.1, **kwargs):
     )
 
 
-def ConvNeXt_Base(attach_head=False, num_classes=1000, dropout=0.1, **kwargs):
+def ConvNeXt_Base(
+    attach_head=False,
+    num_classes=1000,
+    dropout=0.1,
+    pretrained=False,
+    download_dir=None,
+    **kwargs
+):
     return ConvNeXt(
         depths=(3, 3, 27, 3),
         dims=(128, 256, 512, 1024),
@@ -130,7 +151,14 @@ def ConvNeXt_Base(attach_head=False, num_classes=1000, dropout=0.1, **kwargs):
     )
 
 
-def ConvNeXt_Large(attach_head=False, num_classes=1000, dropout=0.1, **kwargs):
+def ConvNeXt_Large(
+    attach_head=False,
+    num_classes=1000,
+    dropout=0.1,
+    pretrained=False,
+    download_dir=None,
+    **kwargs
+):
     return ConvNeXt(
         depths=(3, 3, 27, 3),
         dims=(192, 384, 768, 1536),
@@ -141,7 +169,14 @@ def ConvNeXt_Large(attach_head=False, num_classes=1000, dropout=0.1, **kwargs):
     )
 
 
-def ConvNeXt_XLarge(attach_head=False, num_classes=1000, dropout=0.1, **kwargs):
+def ConvNeXt_XLarge(
+    attach_head=False,
+    num_classes=1000,
+    dropout=0.1,
+    pretrained=False,
+    download_dir=None,
+    **kwargs
+):
     return ConvNeXt(
         depths=(3, 3, 27, 3),
         dims=(256, 512, 1024, 2048),

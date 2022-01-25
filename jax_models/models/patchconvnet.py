@@ -174,7 +174,14 @@ class PatchConvNet(nn.Module):
         return x
 
 
-def PatchConvNet_S60(attach_head=True, num_classes=1000, dropout=0.1, **kwargs):
+def PatchConvNet_S60(
+    attach_head=True,
+    num_classes=1000,
+    dropout=0.1,
+    pretrained=False,
+    download_dir=None,
+    **kwargs
+):
     model = PatchConvNet(
         depth=60,
         dim=384,
@@ -187,7 +194,14 @@ def PatchConvNet_S60(attach_head=True, num_classes=1000, dropout=0.1, **kwargs):
     return model
 
 
-def PatchConvNet_S120(attach_head=True, num_classes=1000, dropout=0.1, **kwargs):
+def PatchConvNet_S120(
+    attach_head=True,
+    num_classes=1000,
+    dropout=0.1,
+    pretrained=False,
+    download_dir=None,
+    **kwargs
+):
     model = PatchConvNet(
         depth=120,
         dim=384,
@@ -200,7 +214,14 @@ def PatchConvNet_S120(attach_head=True, num_classes=1000, dropout=0.1, **kwargs)
     return model
 
 
-def PatchConvNet_B60(attach_head=True, num_classes=1000, dropout=0.1, **kwargs):
+def PatchConvNet_B60(
+    attach_head=True,
+    num_classes=1000,
+    dropout=0.1,
+    pretrained=False,
+    download_dir=None,
+    **kwargs
+):
     model = PatchConvNet(
         depth=60,
         dim=768,
@@ -213,7 +234,14 @@ def PatchConvNet_B60(attach_head=True, num_classes=1000, dropout=0.1, **kwargs):
     return model
 
 
-def PatchConvNet_B120(attach_head=True, num_classes=1000, dropout=0.1, **kwargs):
+def PatchConvNet_B120(
+    attach_head=True,
+    num_classes=1000,
+    dropout=0.1,
+    pretrained=False,
+    download_dir=None,
+    **kwargs
+):
     model = PatchConvNet(
         depth=120,
         dim=768,
@@ -226,7 +254,14 @@ def PatchConvNet_B120(attach_head=True, num_classes=1000, dropout=0.1, **kwargs)
     return model
 
 
-def PatchConvNet_L60(attach_head=True, num_classes=1000, dropout=0.1, **kwargs):
+def PatchConvNet_L60(
+    attach_head=True,
+    num_classes=1000,
+    dropout=0.1,
+    pretrained=False,
+    download_dir=None,
+    **kwargs
+):
     model = PatchConvNet(
         depth=60,
         dim=1024,
@@ -239,7 +274,14 @@ def PatchConvNet_L60(attach_head=True, num_classes=1000, dropout=0.1, **kwargs):
     return model
 
 
-def PatchConvNet_L120(attach_head=True, num_classes=1000, dropout=0.1, **kwargs):
+def PatchConvNet_L120(
+    attach_head=True,
+    num_classes=1000,
+    dropout=0.1,
+    pretrained=False,
+    download_dir=None,
+    **kwargs
+):
     model = PatchConvNet(
         depth=120,
         dim=1024,

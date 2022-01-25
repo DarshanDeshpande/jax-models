@@ -275,21 +275,56 @@ class M48(nn.Module):
         return x
 
 
-def PoolFormer_S12(attach_head=False, num_classes=1000, dropout=0.1, **kwargs):
+def PoolFormer_S12(
+    attach_head=False,
+    num_classes=1000,
+    dropout=0.1,
+    pretrained=False,
+    download_dir=None,
+    **kwargs
+):
     return S12(attach_head, num_classes, dropout, **kwargs)
 
 
-def PoolFormer_S24(attach_head=False, num_classes=1000, dropout=0.1, **kwargs):
+def PoolFormer_S24(
+    attach_head=False,
+    num_classes=1000,
+    dropout=0.1,
+    pretrained=False,
+    download_dir=None,
+    **kwargs
+):
     return S24(attach_head, num_classes, dropout, **kwargs)
 
 
-def PoolFormer_S36(attach_head=False, num_classes=1000, dropout=0.1, **kwargs):
+def PoolFormer_S36(
+    attach_head=False,
+    num_classes=1000,
+    dropout=0.1,
+    pretrained=False,
+    download_dir=None,
+    **kwargs
+):
     return S36(attach_head, num_classes, dropout, **kwargs)
 
 
-def PoolFormer_M36(attach_head=False, num_classes=1000, dropout=0.1, **kwargs):
+def PoolFormer_M36(
+    attach_head=False,
+    num_classes=1000,
+    dropout=0.1,
+    pretrained=False,
+    download_dir=None,
+    **kwargs
+):
     return M36(attach_head, num_classes, dropout, **kwargs)
 
 
-def PoolFormer_M48(attach_head=False, num_classes=1000, dropout=0.1, **kwargs):
+def PoolFormer_M48(
+    attach_head=False,
+    num_classes=1000,
+    dropout=0.1,
+    pretrained=False,
+    download_dir=None,
+    **kwargs
+):
     return M48(attach_head, num_classes, dropout, **kwargs)

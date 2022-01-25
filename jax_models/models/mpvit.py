@@ -372,7 +372,14 @@ class MPViT(nn.Module):
         return mptb
 
 
-def MPViT_Tiny(attach_head=True, num_classes=1000, dropout=0.1, **kwargs):
+def MPViT_Tiny(
+    attach_head=True,
+    num_classes=1000,
+    dropout=0.1,
+    pretrained=False,
+    download_dir=None,
+    **kwargs,
+):
     return MPViT(
         mlp_ratio=2,
         channels_list=(64, 96, 176, 216),
@@ -385,7 +392,14 @@ def MPViT_Tiny(attach_head=True, num_classes=1000, dropout=0.1, **kwargs):
     )
 
 
-def MPViT_XSmall(attach_head=True, num_classes=1000, dropout=0.1, **kwargs):
+def MPViT_XSmall(
+    attach_head=True,
+    num_classes=1000,
+    dropout=0.1,
+    pretrained=False,
+    download_dir=None,
+    **kwargs,
+):
     return MPViT(
         mlp_ratio=4,
         channels_list=(64, 128, 192, 256),
@@ -398,7 +412,14 @@ def MPViT_XSmall(attach_head=True, num_classes=1000, dropout=0.1, **kwargs):
     )
 
 
-def MPViT_Small(attach_head=True, num_classes=1000, dropout=0.1, **kwargs):
+def MPViT_Small(
+    attach_head=True,
+    num_classes=1000,
+    dropout=0.1,
+    pretrained=False,
+    download_dir=None,
+    **kwargs,
+):
     return MPViT(
         mlp_ratio=4,
         channels_list=(64, 128, 216, 288),
@@ -411,7 +432,14 @@ def MPViT_Small(attach_head=True, num_classes=1000, dropout=0.1, **kwargs):
     )
 
 
-def MPViT_Base(attach_head=True, num_classes=1000, dropout=0.1, **kwargs):
+def MPViT_Base(
+    attach_head=True,
+    num_classes=1000,
+    dropout=0.1,
+    pretrained=False,
+    download_dir=None,
+    **kwargs,
+):
     return MPViT(
         mlp_ratio=4,
         channels_list=(128, 224, 368, 480),

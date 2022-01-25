@@ -6,6 +6,7 @@ import jax.numpy as jnp
 import flax.linen as nn
 
 from ..layers import PatchEmbed, TransformerMLP, DropPath, AdaptiveAveragePool1D
+from ..models.helper import load_trained_params, download_checkpoint_params
 
 from typing import Iterable, Optional
 
@@ -18,6 +19,15 @@ __all__ = [
     "SwinLarge224",
     "SwinLarge384",
 ]
+
+pretrained_cfgs = {
+    "swin-tiny-224": "https://github.com/DarshanDeshpande/jax-models/releases/download/v0.1-swin/swin_tiny_224_1k.weights",
+    "swin-small-224": "https://github.com/DarshanDeshpande/jax-models/releases/download/v0.1-swin/swin_small_224_1k.weights",
+    "swin-base-224": "https://github.com/DarshanDeshpande/jax-models/releases/download/v0.1-swin/swin_base_224_22k.weights",
+    "swin-base-384": "https://github.com/DarshanDeshpande/jax-models/releases/download/v0.1-swin/swin_base_384_22k.weights",
+    "swin-large-224": "https://github.com/DarshanDeshpande/jax-models/releases/download/v0.1-swin/swin_large_224_22k.weights",
+    "swin-large-384": "https://github.com/DarshanDeshpande/jax-models/releases/download/v0.1-swin/swin_large_384_22k.weights",
+}
 
 
 def window_partition(x, window_size):
@@ -399,8 +409,10 @@ class SwinTransformer(nn.Module):
         return x
 
 
-def SwinTiny224(attach_head=True, num_classes=1000, dropout=0.0):
-    return SwinTransformer(
+def SwinTiny224(
+    attach_head=True, num_classes=1000, dropout=0.0, pretrained=False, download_dir=None
+):
+    model = SwinTransformer(
         patch_size=4,
         emb_dim=96,
         depths=(2, 2, 6, 2),
@@ -416,9 +428,21 @@ def SwinTiny224(attach_head=True, num_classes=1000, dropout=0.0):
         num_classes=num_classes,
     )
 
+    if pretrained:
+        file_path = download_checkpoint_params(
+            pretrained_cfgs["swin-tiny-224"], download_dir
+        )
+        params = load_trained_params(file_path)
+        return model, params
 
-def SwinSmall224(attach_head=True, num_classes=1000, dropout=0.0):
-    return SwinTransformer(
+    else:
+        return model
+
+
+def SwinSmall224(
+    attach_head=True, num_classes=1000, dropout=0.0, pretrained=False, download_dir=None
+):
+    model = SwinTransformer(
         patch_size=4,
         emb_dim=96,
         depths=(2, 2, 18, 2),
@@ -434,9 +458,25 @@ def SwinSmall224(attach_head=True, num_classes=1000, dropout=0.0):
         num_classes=num_classes,
     )
 
+    if pretrained:
+        file_path = download_checkpoint_params(
+            pretrained_cfgs["swin-small-224"], download_dir
+        )
+        params = load_trained_params(file_path)
+        return model, params
 
-def SwinBase224(attach_head=True, num_classes=1000, dropout=0.0):
-    return SwinTransformer(
+    else:
+        return model
+
+
+def SwinBase224(
+    attach_head=True,
+    num_classes=21841,
+    dropout=0.0,
+    pretrained=False,
+    download_dir=None,
+):
+    model = SwinTransformer(
         patch_size=4,
         emb_dim=128,
         depths=(2, 2, 18, 2),
@@ -452,9 +492,25 @@ def SwinBase224(attach_head=True, num_classes=1000, dropout=0.0):
         num_classes=num_classes,
     )
 
+    if pretrained:
+        file_path = download_checkpoint_params(
+            pretrained_cfgs["swin-base-224"], download_dir
+        )
+        params = load_trained_params(file_path)
+        return model, params
 
-def SwinLarge224(attach_head=True, num_classes=1000, dropout=0.0):
-    return SwinTransformer(
+    else:
+        return model
+
+
+def SwinLarge224(
+    attach_head=True,
+    num_classes=21841,
+    dropout=0.0,
+    pretrained=False,
+    download_dir=None,
+):
+    model = SwinTransformer(
         patch_size=4,
         emb_dim=192,
         depths=(2, 2, 18, 2),
@@ -470,9 +526,25 @@ def SwinLarge224(attach_head=True, num_classes=1000, dropout=0.0):
         num_classes=num_classes,
     )
 
+    if pretrained:
+        file_path = download_checkpoint_params(
+            pretrained_cfgs["swin-large-224"], download_dir
+        )
+        params = load_trained_params(file_path)
+        return model, params
 
-def SwinBase384(attach_head=True, num_classes=1000, dropout=0.0):
-    return SwinTransformer(
+    else:
+        return model
+
+
+def SwinBase384(
+    attach_head=True,
+    num_classes=21841,
+    dropout=0.0,
+    pretrained=False,
+    download_dir=None,
+):
+    model = SwinTransformer(
         patch_size=4,
         emb_dim=128,
         depths=(2, 2, 18, 2),
@@ -488,9 +560,25 @@ def SwinBase384(attach_head=True, num_classes=1000, dropout=0.0):
         num_classes=num_classes,
     )
 
+    if pretrained:
+        file_path = download_checkpoint_params(
+            pretrained_cfgs["swin-base-384"], download_dir
+        )
+        params = load_trained_params(file_path)
+        return model, params
 
-def SwinLarge384(attach_head=True, num_classes=1000, dropout=0.0):
-    return SwinTransformer(
+    else:
+        return model
+
+
+def SwinLarge384(
+    attach_head=True,
+    num_classes=21841,
+    dropout=0.0,
+    pretrained=False,
+    download_dir=None,
+):
+    model = SwinTransformer(
         patch_size=4,
         emb_dim=192,
         depths=(2, 2, 18, 2),
@@ -505,3 +593,13 @@ def SwinLarge384(attach_head=True, num_classes=1000, dropout=0.0):
         attach_head=attach_head,
         num_classes=num_classes,
     )
+
+    if pretrained:
+        file_path = download_checkpoint_params(
+            pretrained_cfgs["swin-large-384"], download_dir
+        )
+        params = load_trained_params(file_path)
+        return model, params
+
+    else:
+        return model

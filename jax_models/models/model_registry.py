@@ -65,4 +65,11 @@ def list_models():
 def load_model(
     model_str="", attach_head=False, num_classes=1000, dropout=0.0, **kwargs
 ):
-    return model_dict[model_str](attach_head, num_classes, dropout=dropout, **kwargs)
+    return model_dict[model_str](
+        attach_head,
+        num_classes,
+        dropout=dropout,
+        pretrained=False,
+        download_dir=None,
+        **kwargs
+    )

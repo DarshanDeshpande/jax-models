@@ -35,6 +35,6 @@ setup(
     packages=["jax_models"],
     package_data={"jax_models": ["*/*"]},
     include_package_data=True,
-    install_requires=["flax >= 0.3.6"],
+    install_requires=["flax >= 0.3.6", "tqdm"],
     python_requires=">=3.6",
 )

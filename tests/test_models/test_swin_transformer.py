@@ -2,7 +2,7 @@ import unittest
 import jax.numpy as jnp
 import jax.random as random
 
-from jax_models.models.swin_transformer import SwinTransformer
+from jax_models.models.swin_transformer import *
 
 
 class TestSwinTransformer(unittest.TestCase):
@@ -18,7 +18,7 @@ class TestSwinTransformer(unittest.TestCase):
             x,
             False,
             rngs={"dropout": rng2, "drop_path": rng3},
-            mutable=["attention_mask", "rel_pos_index"],
+            mutable=["attention_mask", "relative_position_index"],
         )
         self.assertEqual(out[0].shape, (1, 768))
 
@@ -34,6 +34,64 @@ class TestSwinTransformer(unittest.TestCase):
             x,
             False,
             rngs={"dropout": rng2, "drop_path": rng3},
-            mutable=["attention_mask", "rel_pos_index"],
+            mutable=["attention_mask", "relative_position_index"],
         )
         self.assertEqual(out[0].shape, (1, 1000))
+
+    def test_pretrained_weights(self):
+        x = jnp.zeros([1, 224, 224, 3])
+        y = jnp.zeros([1, 384, 384, 3])
+
+        swin, params = SwinTiny224(pretrained=True, download_dir='weights/')
+        swin.apply(
+            {"params": params},
+            x,
+            False,
+            rngs={"drop_path": random.PRNGKey(2)},
+            mutable=["attention_mask", "relative_position_index"],
+        )
+
+        swin, params = SwinSmall224(pretrained=True, download_dir='weights/')
+        swin.apply(
+            {"params": params},
+            x,
+            False,
+            rngs={"drop_path": random.PRNGKey(2)},
+            mutable=["attention_mask", "relative_position_index"],
+        )
+
+        swin, params = SwinBase224(pretrained=True, download_dir='weights/')
+        swin.apply(
+            {"params": params},
+            x,
+            False,
+            rngs={"drop_path": random.PRNGKey(2)},
+            mutable=["attention_mask", "relative_position_index"],
+        )
+
+        swin, params = SwinBase384(pretrained=True, download_dir='weights/')
+        swin.apply(
+            {"params": params},
+            y,
+            False,
+            rngs={"drop_path": random.PRNGKey(2)},
+            mutable=["attention_mask", "relative_position_index"],
+        )
+
+        swin, params = SwinLarge224(pretrained=True, download_dir='weights/')
+        swin.apply(
+            {"params": params},
+            x,
+            False,
+            rngs={"drop_path": random.PRNGKey(2)},
+            mutable=["attention_mask", "relative_position_index"],
+        )
+
+        swin, params = SwinLarge384(pretrained=True, download_dir='weights/')
+        swin.apply(
+            {"params": params},
+            y,
+            False,
+            rngs={"drop_path": random.PRNGKey(2)},
+            mutable=["attention_mask", "relative_position_index"],
+        )

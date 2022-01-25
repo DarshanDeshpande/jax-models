@@ -94,8 +94,11 @@ To load your desired model:
 
 ```py
 from jax_models.models.model_registry import load_model
-load_model('mpvit-base', attach_head=True, num_classes=1000, dropout=0.1)
+load_model('swin-tiny-224', attach_head=True, num_classes=1000, dropout=0.0, pretrained=True)
 ```
+
+Note: It is necessary to pass `attach_head=True` and `num_classes` while loading pretrained models.
+
 
 <!-- CONTRIBUTING -->
 ## Contributing

@@ -233,7 +233,14 @@ class MaskedAutoencoderViT(nn.Module):
         return x, mask
 
 
-def MAE_Base(attach_head=None, num_classes=None, dropout=None, **kwargs):
+def MAE_Base(
+    attach_head=None,
+    num_classes=None,
+    dropout=None,
+    pretrained=False,
+    download_dir=None,
+    **kwargs
+):
     logging.info(
         "Default classification arguments are ignored since this is a generative model. To tune the hyperparameters, please call `MaskedAutoencoderViT` separately with your desired arguments."
     )
@@ -251,7 +258,14 @@ def MAE_Base(attach_head=None, num_classes=None, dropout=None, **kwargs):
     )
 
 
-def MAE_Large(attach_head=None, num_classes=None, dropout=None, **kwargs):
+def MAE_Large(
+    attach_head=None,
+    num_classes=None,
+    dropout=None,
+    pretrained=False,
+    download_dir=None,
+    **kwargs
+):
     logging.info(
         "Default classification arguments are ignored since this is a generative model. To tune the hyperparameters, please call `MaskedAutoencoderViT` separately with your desired arguments."
     )
@@ -269,7 +283,14 @@ def MAE_Large(attach_head=None, num_classes=None, dropout=None, **kwargs):
     )
 
 
-def MAE_Huge(attach_head=None, num_classes=None, dropout=None, **kwargs):
+def MAE_Huge(
+    attach_head=None,
+    num_classes=None,
+    dropout=None,
+    pretrained=False,
+    download_dir=None,
+    **kwargs
+):
     logging.info(
         "Default classification arguments are ignored since this is a generative model. To tune the hyperparameters, please call `MaskedAutoencoderViT` separately with your desired arguments."
     )

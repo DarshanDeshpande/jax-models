@@ -61,17 +61,45 @@ class ConvMixer(nn.Module):
         return x
 
 
-def ConvMixer_1536_20(attach_head=False, num_classes=1000, dropout=None, **kwargs):
+def ConvMixer_1536_20(
+    attach_head=False,
+    num_classes=1000,
+    dropout=None,
+    pretrained=False,
+    download_dir=None,
+    **kwargs
+):
     return ConvMixer(1536, 7, 20, 9, attach_head, num_classes, **kwargs)
 
 
-def ConvMixer_768_32(attach_head=False, num_classes=1000, dropout=None, **kwargs):
+def ConvMixer_768_32(
+    attach_head=False,
+    num_classes=1000,
+    dropout=None,
+    pretrained=False,
+    download_dir=None,
+    **kwargs
+):
     return ConvMixer(768, 7, 32, 7, attach_head, num_classes, **kwargs)
 
 
-def ConvMixer_512_12(attach_head=False, num_classes=1000, dropout=None, **kwargs):
+def ConvMixer_512_12(
+    attach_head=False,
+    num_classes=1000,
+    dropout=None,
+    pretrained=False,
+    download_dir=None,
+    **kwargs
+):
     return ConvMixer(512, 7, 12, 8, attach_head, num_classes, **kwargs)
 
 
-def ConvMixer_1024_20(attach_head=False, num_classes=1000, dropout=None, **kwargs):
+def ConvMixer_1024_20(
+    attach_head=False,
+    num_classes=1000,
+    dropout=None,
+    pretrained=False,
+    download_dir=None,
+    **kwargs
+):
     return ConvMixer(1024, 14, 20, 9, attach_head, num_classes, **kwargs)

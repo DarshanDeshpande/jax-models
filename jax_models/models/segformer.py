@@ -332,6 +332,8 @@ def SegFormer_B0(
     num_classes=19,
     dropout=0.0,
     drop_path=0.1,
+    pretrained=False,
+    download_dir=None,
     **kwargs,
 ):
     return SegFormer(
@@ -351,7 +353,13 @@ def SegFormer_B0(
 
 
 def SegFormer_B1(
-    attach_head=False, num_classes=19, dropout=0.0, drop_path=0.1, **kwargs
+    attach_head=False,
+    num_classes=19,
+    dropout=0.0,
+    drop_path=0.1,
+    pretrained=False,
+    download_dir=None,
+    **kwargs,
 ):
     return SegFormer(
         4,
@@ -370,7 +378,13 @@ def SegFormer_B1(
 
 
 def SegFormer_B2(
-    attach_head=False, num_classes=19, dropout=0.0, drop_path=0.1, **kwargs
+    attach_head=False,
+    num_classes=19,
+    dropout=0.0,
+    drop_path=0.1,
+    pretrained=False,
+    download_dir=None,
+    **kwargs,
 ):
     return SegFormer(
         4,
@@ -389,7 +403,13 @@ def SegFormer_B2(
 
 
 def SegFormer_B3(
-    attach_head=False, num_classes=19, dropout=0.0, drop_path=0.1, **kwargs
+    attach_head=False,
+    num_classes=19,
+    dropout=0.0,
+    drop_path=0.1,
+    pretrained=False,
+    download_dir=None,
+    **kwargs,
 ):
     return SegFormer(
         4,
@@ -408,7 +428,13 @@ def SegFormer_B3(
 
 
 def SegFormer_B4(
-    attach_head=False, num_classes=19, dropout=0.0, drop_path=0.1, **kwargs
+    attach_head=False,
+    num_classes=19,
+    dropout=0.0,
+    drop_path=0.1,
+    pretrained=False,
+    download_dir=None,
+    **kwargs,
 ):
     return SegFormer(
         4,
@@ -427,7 +453,13 @@ def SegFormer_B4(
 
 
 def SegFormer_B5(
-    attach_head=False, num_classes=19, dropout=0.0, drop_path=0.1, **kwargs
+    attach_head=False,
+    num_classes=19,
+    dropout=0.0,
+    drop_path=0.1,
+    pretrained=False,
+    download_dir=None,
+    **kwargs,
 ):
     return SegFormer(
         4,
