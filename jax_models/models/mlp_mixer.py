@@ -2,7 +2,12 @@ import jax.numpy as jnp
 
 import flax.linen as nn
 from ..layers import TransformerMLP
+
 from typing import Optional
+import logging
+
+logging.basicConfig(format="%(levelname)s:%(message)s", level=logging.INFO)
+
 
 __all__ = [
     "MLPMixer",
@@ -45,13 +50,28 @@ class MixerLayer(nn.Module):
 
 
 class MLPMixer(nn.Module):
+    """
+    MLP Mixer Module
+
+    Attributes:
+        patch_size (int): Patch size. Default is 32. 
+        num_mixers_layers (int): Number of mixer layers. Default is 2.
+        hidden_size (int): Hidden embedding size. Default is 768.
+        channels_dim (int): Channels dimension for MLP. Default is 256.
+        tokens_dim (int): Embedding dimension for tokens. Default is 256.
+        dropout (float): Dropout value. Default is 0.2.
+        attach_head (bool): Whether to attach classification head. Default is True.
+        num_classes (int): Number of classification classes. Only works if attach_head is True. Default is 1000.
+        deterministic (bool): Optional argument, if True, network becomes deterministic and dropout is not applied.
+
+    """
     patch_size: int = 32
     num_mixers_layers: int = 2
     hidden_size: int = 768
     channels_dim: int = 256
     tokens_dim: int = 256
     dropout: float = 0.2
-    attach_head: Optional[bool] = False
+    attach_head: bool = False
     num_classes: int = 1000
     deterministic: Optional[bool] = None
 
@@ -88,6 +108,9 @@ def MLPMixer_S32(
     download_dir=None,
     **kwargs
 ):
+    if pretrained:
+        logging.info("Pretrained MLPMixer models aren't available. Loading un-trained model.")
+    
     return MLPMixer(32, 8, 512, 2048, 256, dropout, attach_head, num_classes, **kwargs)
 
 
@@ -99,6 +122,9 @@ def MLPMixer_S16(
     download_dir=None,
     **kwargs
 ):
+    if pretrained:
+        logging.info("Pretrained MLPMixer models aren't available. Loading un-trained model.")
+    
     return MLPMixer(16, 8, 512, 2048, 256, dropout, attach_head, num_classes, **kwargs)
 
 
@@ -110,6 +136,9 @@ def MLPMixer_B32(
     download_dir=None,
     **kwargs
 ):
+    if pretrained:
+        logging.info("Pretrained MLPMixer models aren't available. Loading un-trained model.")
+    
     return MLPMixer(32, 12, 768, 3072, 384, dropout, attach_head, num_classes, **kwargs)
 
 
@@ -121,6 +150,9 @@ def MLPMixer_L32(
     download_dir=None,
     **kwargs
 ):
+    if pretrained:
+        logging.info("Pretrained MLPMixer models aren't available. Loading un-trained model.")
+    
     return MLPMixer(
         32, 24, 1024, 4096, 512, dropout, attach_head, num_classes, **kwargs
     )
@@ -134,6 +166,9 @@ def MLPMixer_L16(
     download_dir=None,
     **kwargs
 ):
+    if pretrained:
+        logging.info("Pretrained MLPMixer models aren't available. Loading un-trained model.")
+    
     return MLPMixer(
         16, 24, 1024, 4096, 512, dropout, attach_head, num_classes, **kwargs
     )
@@ -147,6 +182,9 @@ def MLPMixer_H14(
     download_dir=None,
     **kwargs
 ):
+    if pretrained:
+        logging.info("Pretrained MLPMixer models aren't available. Loading un-trained model.")
+    
     return MLPMixer(
         14, 32, 1280, 5120, 640, dropout, attach_head, num_classes, **kwargs
     )

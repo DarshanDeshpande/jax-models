@@ -1,9 +1,12 @@
 import jax.numpy as jnp
-
 import flax.linen as nn
-from typing import Optional
 
 from ..layers import SqueezeAndExcitation, DropPath, TransformerMLP
+
+from typing import Optional
+import logging
+
+logging.basicConfig(format="%(levelname)s:%(message)s", level=logging.INFO)
 
 __all__ = [
     "PatchConvNet",
@@ -138,6 +141,19 @@ class AttentionPoolingBlock(nn.Module):
 
 
 class PatchConvNet(nn.Module):
+    """
+    PatchConvNet Module
+
+    Attributes:
+        depth (int): Depth for PatchConvNet. Default is 20.
+        dim (int): Embedding dimension. Default is 768.
+        dropout (float): Dropout value. Default is 0.5.
+        mlp_ratio (int): Multiplier for hidden dimension in transformer MLP block. Default is 4.
+        attach_head (bool): Whether to attach classification head. Default is True.
+        num_classes (int): Number of classification classes. Only works if attach_head is True. Default is 1000.
+        deterministic (bool): Optional argument, if True, network becomes deterministic and dropout is not applied.
+        
+    """
     depth: int = 20
     dim: int = 768
     dropout: float = 0.5

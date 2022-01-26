@@ -1,9 +1,13 @@
 import jax.random as random
 import jax.numpy as jnp
 import flax.linen as nn
-from typing import Optional, Iterable, Sequence
 
 from ..layers import DepthwiseConv2D, DropPath
+
+from typing import Optional, Iterable, Sequence
+import logging
+
+logging.basicConfig(format="%(levelname)s:%(message)s", level=logging.INFO)
 
 __all__ = [
     "ConvNeXt",
@@ -46,6 +50,21 @@ class ConvNeXtBlock(nn.Module):
 
 
 class ConvNeXt(nn.Module):
+    """
+    ConvNeXt Module
+
+    Attributes:
+        
+        depths (list or tuple): Depths for every block
+        dims (list or tuple): Embedding dimension for every stage.
+        drop_path (float): Dropout value for DropPath. Default is 0.1
+        layer_scale_init_value (float): Initialization value for scale. Default is 1e-6.
+        head_init_scale (float): Initialization value for head. Default is 1.0.
+        attach_head (bool): Whether to attach classification head. Default is False.
+        num_classes (int): Number of classification classes. Only works if attach_head is True. Default is 1000.
+        deterministic (bool): Optional argument, if True, network becomes deterministic and dropout is not applied.
+
+    """
     depths: Iterable = (3, 3, 9, 3)
     dims: Iterable = (96, 192, 384, 768)
     drop_path: float = 0.1
@@ -105,6 +124,9 @@ def ConvNeXt_Tiny(
     download_dir=None,
     **kwargs
 ):
+    if pretrained:
+        logging.info("Pretrained ConvNeXt Tiny isn't available. Loading un-trained model.")
+
     return ConvNeXt(
         depths=(3, 3, 9, 3),
         dims=(96, 192, 384, 768),
@@ -123,6 +145,9 @@ def ConvNeXt_Small(
     download_dir=None,
     **kwargs
 ):
+    if pretrained:
+        logging.info("Pretrained ConvNeXt Small isn't available. Loading un-trained model.")
+    
     return ConvNeXt(
         depths=(3, 3, 27, 3),
         dims=(96, 192, 384, 768),
@@ -141,6 +166,9 @@ def ConvNeXt_Base(
     download_dir=None,
     **kwargs
 ):
+    if pretrained:
+        logging.info("Pretrained ConvNeXt Base isn't available. Loading un-trained model.")
+    
     return ConvNeXt(
         depths=(3, 3, 27, 3),
         dims=(128, 256, 512, 1024),
@@ -159,6 +187,9 @@ def ConvNeXt_Large(
     download_dir=None,
     **kwargs
 ):
+    if pretrained:
+        logging.info("Pretrained ConvNeXt Large isn't available. Loading un-trained model.")
+    
     return ConvNeXt(
         depths=(3, 3, 27, 3),
         dims=(192, 384, 768, 1536),
@@ -177,6 +208,9 @@ def ConvNeXt_XLarge(
     download_dir=None,
     **kwargs
 ):
+    if pretrained:
+        logging.info("Pretrained ConvNeXt XLarge isn't available. Loading un-trained model.")
+    
     return ConvNeXt(
         depths=(3, 3, 27, 3),
         dims=(256, 512, 1024, 2048),

@@ -1,8 +1,12 @@
 import jax.numpy as jnp
 import flax.linen as nn
 
-from typing import Optional
 from ..layers import DepthwiseConv2D
+
+from typing import Optional
+import logging
+
+logging.basicConfig(format="%(levelname)s:%(message)s", level=logging.INFO)
 
 __all__ = [
     "ConvMixer",
@@ -35,11 +39,24 @@ class ConvMixerLayer(nn.Module):
 
 
 class ConvMixer(nn.Module):
-    features: int = 512  # h
+    """
+    ConvMixer Module
+
+    Attributes:
+        features (int): Number of features. Default is 512.
+        patch_size (int): Patch size. Default is 7. 
+        num_mixer_layers (int): Number of mixer layers. Default is 12.
+        filter_size (int): Size of convolution filters. Default is 9.
+        attach_head (bool): Whether to attach classification head. Default is True
+        num_classes (int): Number of classification classes. Only works if attach_head is True. Default is 1000.
+        deterministic (bool): Optional argument, if True, network becomes deterministic and dropout is not applied.        
+
+    """
+    features: int = 512 
     patch_size: int = 7
-    num_mixer_layers: int = 12  # depth
+    num_mixer_layers: int = 12
     filter_size: int = 9
-    attach_head: bool = False
+    attach_head: bool = True
     num_classes: int = 1000
     deterministic: Optional[bool] = None
 
@@ -69,6 +86,8 @@ def ConvMixer_1536_20(
     download_dir=None,
     **kwargs
 ):
+    if pretrained:
+        logging.info("Pretrained model for ConvMixer isn't available. Loading un-trained model instead")
     return ConvMixer(1536, 7, 20, 9, attach_head, num_classes, **kwargs)
 
 
@@ -80,6 +99,8 @@ def ConvMixer_768_32(
     download_dir=None,
     **kwargs
 ):
+    if pretrained:
+        logging.info("Pretrained model for ConvMixer isn't available. Loading un-trained model instead")
     return ConvMixer(768, 7, 32, 7, attach_head, num_classes, **kwargs)
 
 
@@ -91,6 +112,8 @@ def ConvMixer_512_12(
     download_dir=None,
     **kwargs
 ):
+    if pretrained:
+        logging.info("Pretrained model for ConvMixer isn't available. Loading un-trained model instead")
     return ConvMixer(512, 7, 12, 8, attach_head, num_classes, **kwargs)
 
 
@@ -102,4 +125,6 @@ def ConvMixer_1024_20(
     download_dir=None,
     **kwargs
 ):
+    if pretrained:
+        logging.info("Pretrained model for ConvMixer isn't available. Loading un-trained model instead")
     return ConvMixer(1024, 14, 20, 9, attach_head, num_classes, **kwargs)

@@ -339,6 +339,26 @@ class SwinLayer(nn.Module):
 
 
 class SwinTransformer(nn.Module):
+    """
+    Swin Transformer Module
+
+    Attributes:
+        patch_size (int): Patch size. Default is 4. 
+        emb_dim (int): Embedding dimension. Default is 96.
+        depths (list or tuple): Depths for every block
+        num_heads (list or tuple): Number of attention heads for every stage
+        window_size (int): Window size. Default is 7.
+        mlp_ratio (int): Multiplier for hidden dimension in transformer MLP block. Default is 4.
+        use_att_bias (bool): Whether to use bias for linear qkv projection. Default is True.
+        dropout (float): Dropout value. Default is 0.
+        att_dropout (float): Dropout value for attention Default is 0.
+        drop_path (float): Dropout value for DropPath. Default is 0.1
+        use_abs_pos_emb (bool): Whether to use absolute positional embedding. Default is False
+        attach_head (bool): Whether to attach classification head. Default is True
+        num_classes (int): Number of classification classes. Only works if attach_head is True. Default is 1000.
+        deterministic (bool): Optional argument, if True, network becomes deterministic and dropout is not applied.
+
+    """
     patch_size: int = 4
     emb_dim: int = 96
     depths: Iterable[int] = (2, 2, 6, 2)

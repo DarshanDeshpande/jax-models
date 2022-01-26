@@ -59,6 +59,9 @@ model_dict = {
 
 
 def list_models():
+    """
+    Lists all available model architectures.
+    """
     return sorted(list(model_dict.keys()))
 
 
@@ -71,6 +74,18 @@ def load_model(
     download_dir=None,
     **kwargs
 ):
+    """
+    Loads an architecture from the list of available architectures.
+    
+    model_str (str): Name of the model to be loaded. Use `list_models()` to view all available models.
+    attach_head (bool): Whether to attach a classification (or other) head to the model. Default is False.
+    num_classes (int): Number of classification classes. Only works if attach_head is True. Default is 1000.
+    dropout (float): Dropout value. Default is 0.
+    pretrained: Whether to load pretrained weights or not. Default is False
+    download_dir: The directory where the model weights are downloaded to. If not provided, the weights will be saved to `~/jax_models`.
+    **kwargs: Any other parameters that are to be passed during model creation.
+    
+    """
     return model_dict[model_str](
         attach_head,
         num_classes,

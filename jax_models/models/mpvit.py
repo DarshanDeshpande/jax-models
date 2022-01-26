@@ -1,10 +1,14 @@
 import jax.numpy as jnp
-
 import flax.linen as nn
-from typing import Optional, Union, Sequence, Iterable
 
 from ..layers import DepthwiseConv2D, SeparableDepthwiseConv2D
 from ..activations import hardswish
+
+from typing import Optional, Union, Sequence, Iterable
+import logging
+
+logging.basicConfig(format="%(levelname)s:%(message)s", level=logging.INFO)
+
 
 __all__ = ["MPViT", "MPViT_Tiny", "MPViT_XSmall", "MPViT_Small", "MPViT_Base"]
 
@@ -334,9 +338,23 @@ class MultiPathTransformerBlock(nn.Module):
 
 
 class MPViT(nn.Module):
+    """
+    MPViT Module
+
+    Attributes:
+        mlp_ratio (int): Multiplier for hidden dimension in transformer MLP block. Default is 2.
+        channels_list (list or tuple): Number of channels for each stage.
+        num_layers_list (list or tuple): Number of layers for each stage.
+        att_drop (float): Dropout value for attention Default is 0.2.
+        proj_drop (float): Dropout value for attention projection. Default is 0.2.
+        attach_head (bool): Whether to attach classification head. Default is True.
+        num_classes (int): Number of classification classes. Only works if attach_head is True. Default is 1000.
+        deterministic (bool): Optional argument, if True, network becomes deterministic and dropout is not applied.
+
+    """
     mlp_ratio: int = 2
-    channels_list: Iterable = (64, 96, 176, 216)
-    num_layers_list: Iterable = (1, 2, 4, 1)
+    channels_list: Iterable[int] = (64, 96, 176, 216)
+    num_layers_list: Iterable[int] = (1, 2, 4, 1)
     att_drop: float = 0.2
     proj_drop: float = 0.2
     attach_head: bool = True
@@ -380,6 +398,9 @@ def MPViT_Tiny(
     download_dir=None,
     **kwargs,
 ):
+    if pretrained:
+        logging.info("Pretrained model for MPViT tiny isn't available. Loading un-trained model instead")
+    
     return MPViT(
         mlp_ratio=2,
         channels_list=(64, 96, 176, 216),
@@ -400,6 +421,9 @@ def MPViT_XSmall(
     download_dir=None,
     **kwargs,
 ):
+    if pretrained:
+        logging.info("Pretrained model for MPViT XSmall isn't available. Loading un-trained model instead")
+    
     return MPViT(
         mlp_ratio=4,
         channels_list=(64, 128, 192, 256),
@@ -420,6 +444,9 @@ def MPViT_Small(
     download_dir=None,
     **kwargs,
 ):
+    if pretrained:
+        logging.info("Pretrained model for MPViT Small isn't available. Loading un-trained model instead")
+    
     return MPViT(
         mlp_ratio=4,
         channels_list=(64, 128, 216, 288),
@@ -440,6 +467,9 @@ def MPViT_Base(
     download_dir=None,
     **kwargs,
 ):
+    if pretrained:
+        logging.info("Pretrained model for MPViT Base isn't available. Loading un-trained model instead")
+    
     return MPViT(
         mlp_ratio=4,
         channels_list=(128, 224, 368, 480),

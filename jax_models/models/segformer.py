@@ -2,10 +2,13 @@ import jax.numpy as jnp
 from jax.image import resize
 import flax.linen as nn
 
-from typing import Optional, Iterable, Any
-
 from ..layers import DropPath
 from ..layers import TransformerMLP
+
+from typing import Optional, Iterable, Any
+import logging
+
+logging.basicConfig(format="%(levelname)s:%(message)s", level=logging.INFO)
 
 __all__ = [
     "SegFormer",
@@ -284,12 +287,33 @@ class SegFormerHead(nn.Module):
 
 
 class SegFormer(nn.Module):
+    """
+    SegFormer Module
+
+    Attributes:
+        patch_size (int): Patch size. Default is 4. 
+        emb_dims (list or tuple): Embedding dimension for every block.
+        num_heads (list or tuple): Number of attention heads for every stage.
+        mlp_ratios (int): Multiplier for hidden dimension in transformer MLP block at every stage. Default is 4 at every stage.
+        drop (float): Dropout value. Default is 0.
+        att_dropout (float): Dropout value for attention Default is 0.
+        drop_path (float): Dropout value for DropPath. Default is 0.1.
+        depths (list or tuple): Depths for every block.
+        sr_ratios (list or tuple): sr ratio for every block.
+        num_classes (int): Number of classification classes. Only works if attach_head is True. Default is 19.
+        decoder_emb (int): Embedding dimension for decoder. Default is 256.
+        axis_name (str): Optional str, Used when parallelizing training over multiple devices. Default is None.
+        axis_index_groups: Index groups used when parallelizing training over multiple devices. Default is None.
+        attach_head (bool): Whether to attach classification head. Default is False
+        deterministic (bool): Optional argument, if True, network becomes deterministic and dropout is not applied.
+
+    """
     patch_size: int = 4
     emb_dims: Iterable = (64, 128, 256, 512)
     num_heads: Iterable = (1, 2, 4, 8)
     mlp_ratios = (4, 4, 4, 4)
-    drop: float = 0.1
-    att_drop: float = 0.1
+    drop: float = 0.0
+    att_drop: float = 0.0
     drop_path: float = 0.1
     depths: Iterable = (3, 4, 6, 3)
     sr_ratios: Iterable = (8, 4, 2, 1)
@@ -336,6 +360,9 @@ def SegFormer_B0(
     download_dir=None,
     **kwargs,
 ):
+    if pretrained:
+        logging.info("Pretrained SegFormer_B0 isn't available. Loading un-trained model instead")
+    
     return SegFormer(
         4,
         (32, 64, 160, 256),
@@ -361,6 +388,9 @@ def SegFormer_B1(
     download_dir=None,
     **kwargs,
 ):
+    if pretrained:
+        logging.info("Pretrained SegFormer_B1 isn't available. Loading un-trained model instead")
+    
     return SegFormer(
         4,
         (64, 128, 320, 512),
@@ -386,6 +416,9 @@ def SegFormer_B2(
     download_dir=None,
     **kwargs,
 ):
+    if pretrained:
+        logging.info("Pretrained SegFormer_B2 isn't available. Loading un-trained model instead")
+    
     return SegFormer(
         4,
         (64, 128, 320, 512),
@@ -411,6 +444,9 @@ def SegFormer_B3(
     download_dir=None,
     **kwargs,
 ):
+    if pretrained:
+        logging.info("Pretrained SegFormer_B3 isn't available. Loading un-trained model instead")
+    
     return SegFormer(
         4,
         (64, 128, 320, 512),
@@ -436,6 +472,9 @@ def SegFormer_B4(
     download_dir=None,
     **kwargs,
 ):
+    if pretrained:
+        logging.info("Pretrained SegFormer_B4 isn't available. Loading un-trained model instead")
+    
     return SegFormer(
         4,
         (64, 128, 320, 512),
@@ -461,6 +500,9 @@ def SegFormer_B5(
     download_dir=None,
     **kwargs,
 ):
+    if pretrained:
+        logging.info("Pretrained SegFormer_B5 isn't available. Loading un-trained model instead")
+    
     return SegFormer(
         4,
         (64, 128, 320, 512),
