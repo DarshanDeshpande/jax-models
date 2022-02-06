@@ -152,8 +152,9 @@ class PatchConvNet(nn.Module):
         attach_head (bool): Whether to attach classification head. Default is True.
         num_classes (int): Number of classification classes. Only works if attach_head is True. Default is 1000.
         deterministic (bool): Optional argument, if True, network becomes deterministic and dropout is not applied.
-        
+
     """
+
     depth: int = 20
     dim: int = 768
     dropout: float = 0.5

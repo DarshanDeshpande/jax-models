@@ -17,7 +17,7 @@ class DepthwiseConv2D(nn.Module):
     @nn.compact
     def __call__(self, input):
         w = self.param(
-            "weights",
+            "kernel",
             self.weights_init,
             self.kernel_shape + (1, self.channel_multiplier * input.shape[-1]),
         )

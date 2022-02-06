@@ -54,7 +54,7 @@ class MLPMixer(nn.Module):
     MLP Mixer Module
 
     Attributes:
-        patch_size (int): Patch size. Default is 32. 
+        patch_size (int): Patch size. Default is 32.
         num_mixers_layers (int): Number of mixer layers. Default is 2.
         hidden_size (int): Hidden embedding size. Default is 768.
         channels_dim (int): Channels dimension for MLP. Default is 256.
@@ -65,6 +65,7 @@ class MLPMixer(nn.Module):
         deterministic (bool): Optional argument, if True, network becomes deterministic and dropout is not applied.
 
     """
+
     patch_size: int = 32
     num_mixers_layers: int = 2
     hidden_size: int = 768
@@ -109,8 +110,10 @@ def MLPMixer_S32(
     **kwargs
 ):
     if pretrained:
-        logging.info("Pretrained MLPMixer models aren't available. Loading un-trained model.")
-    
+        logging.info(
+            "Pretrained MLPMixer models aren't available. Loading un-trained model."
+        )
+
     return MLPMixer(32, 8, 512, 2048, 256, dropout, attach_head, num_classes, **kwargs)
 
 
@@ -123,8 +126,10 @@ def MLPMixer_S16(
     **kwargs
 ):
     if pretrained:
-        logging.info("Pretrained MLPMixer models aren't available. Loading un-trained model.")
-    
+        logging.info(
+            "Pretrained MLPMixer models aren't available. Loading un-trained model."
+        )
+
     return MLPMixer(16, 8, 512, 2048, 256, dropout, attach_head, num_classes, **kwargs)
 
 
@@ -137,8 +142,10 @@ def MLPMixer_B32(
     **kwargs
 ):
     if pretrained:
-        logging.info("Pretrained MLPMixer models aren't available. Loading un-trained model.")
-    
+        logging.info(
+            "Pretrained MLPMixer models aren't available. Loading un-trained model."
+        )
+
     return MLPMixer(32, 12, 768, 3072, 384, dropout, attach_head, num_classes, **kwargs)
 
 
@@ -151,8 +158,10 @@ def MLPMixer_L32(
     **kwargs
 ):
     if pretrained:
-        logging.info("Pretrained MLPMixer models aren't available. Loading un-trained model.")
-    
+        logging.info(
+            "Pretrained MLPMixer models aren't available. Loading un-trained model."
+        )
+
     return MLPMixer(
         32, 24, 1024, 4096, 512, dropout, attach_head, num_classes, **kwargs
     )
@@ -167,8 +176,10 @@ def MLPMixer_L16(
     **kwargs
 ):
     if pretrained:
-        logging.info("Pretrained MLPMixer models aren't available. Loading un-trained model.")
-    
+        logging.info(
+            "Pretrained MLPMixer models aren't available. Loading un-trained model."
+        )
+
     return MLPMixer(
         16, 24, 1024, 4096, 512, dropout, attach_head, num_classes, **kwargs
     )
@@ -183,8 +194,10 @@ def MLPMixer_H14(
     **kwargs
 ):
     if pretrained:
-        logging.info("Pretrained MLPMixer models aren't available. Loading un-trained model.")
-    
+        logging.info(
+            "Pretrained MLPMixer models aren't available. Loading un-trained model."
+        )
+
     return MLPMixer(
         14, 32, 1280, 5120, 640, dropout, attach_head, num_classes, **kwargs
     )

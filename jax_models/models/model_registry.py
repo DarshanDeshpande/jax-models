@@ -8,6 +8,8 @@ from .convnext import *
 from .masked_autoencoder import *
 from .swin_transformer import *
 
+import fnmatch
+
 
 model_dict = {
     "mpvit-tiny": MPViT_Tiny,
@@ -41,11 +43,22 @@ model_dict = {
     "segformer-b3": SegFormer_B3,
     "segformer-b4": SegFormer_B4,
     "segformer-b5": SegFormer_B5,
-    "convnext-tiny": ConvNeXt_Tiny,
-    "convnext-small": ConvNeXt_Small,
-    "convnext-base": ConvNeXt_Base,
-    "convnext-large": ConvNeXt_Large,
-    "convnext-xlarge": ConvNeXt_XLarge,
+    "convnext": ConvNeXt,
+    "convnext-tiny-224-1k": ConvNeXt_Tiny,
+    "convnext-small-224-1k": ConvNeXt_Small,
+    "convnext-base-224-1k": ConvNeXt_Base_224_1K,
+    "convnext-base-224-22k-1k": ConvNeXt_Base_224_22K_1K,
+    "convnext-base-224-22k": ConvNeXt_Base_224_22K,
+    "convnext-base-384-22k-1k": ConvNeXt_Base_384_22K_1K,
+    "convnext-base-384-22k": ConvNeXt_Base_384_1K,
+    "convnext-large-224-1k": ConvNeXt_Large_224_1K,
+    "convnext-large-224-22k-1k": ConvNeXt_Large_224_22K_1K,
+    "convnext-large-224-22k": ConvNeXt_Large_224_22K,
+    "convnext-large-384-1k": ConvNeXt_Large_384_1K,
+    "convnext-large-384-22k-1k": ConvNeXt_Large_384_22K_1K,
+    "convnext-xlarge-224-22k-1k": ConvNeXt_XLarge_224_22K_1K,
+    "convnext-xlarge-224-22k": ConvNeXt_XLarge_224_22K,
+    "convnext-xlarge-384-22k-1k": ConvNeXt_XLarge_384_22K_1K,
     "mae-base": MAE_Base,
     "mae-large": MAE_Large,
     "mae-huge": MAE_Huge,
@@ -58,11 +71,24 @@ model_dict = {
 }
 
 
-def list_models():
+def list_models(filter=""):
     """
     Lists all available model architectures.
+
+    filter (str): Pattern to match while listing models. Example: swin* will match all swin models and swin-large-384 will match the specific model.
     """
-    return sorted(list(model_dict.keys()))
+    if filter:
+        if "*" not in filter:
+            filter = "".join([filter, "*"])
+
+        model_list = []
+        for model in model_dict.keys():
+            if fnmatch.fnmatch(model, filter):
+                model_list.append(model)
+
+        return sorted(model_list)
+    else:
+        return sorted(list(model_dict.keys()))
 
 
 def load_model(
@@ -76,7 +102,7 @@ def load_model(
 ):
     """
     Loads an architecture from the list of available architectures.
-    
+
     model_str (str): Name of the model to be loaded. Use `list_models()` to view all available models.
     attach_head (bool): Whether to attach a classification (or other) head to the model. Default is False.
     num_classes (int): Number of classification classes. Only works if attach_head is True. Default is 1000.
@@ -84,7 +110,7 @@ def load_model(
     pretrained: Whether to load pretrained weights or not. Default is False
     download_dir: The directory where the model weights are downloaded to. If not provided, the weights will be saved to `~/jax_models`.
     **kwargs: Any other parameters that are to be passed during model creation.
-    
+
     """
     return model_dict[model_str](
         attach_head,

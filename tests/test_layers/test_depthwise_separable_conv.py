@@ -16,7 +16,7 @@ class ParameterTest(unittest.TestCase):
         )
         x = jnp.zeros([1, 32, 32, 3])
         params = dw.init({"params": random.PRNGKey(0)}, x)["params"]
-        self.assertEqual(params["weights"].shape, (3, 3, 1, 6))
+        self.assertEqual(params["kernel"].shape, (3, 3, 1, 6))
         self.assertEqual(params["bias"].shape, (6,))
 
     def test_param_shape_sep_conv(self):
@@ -34,5 +34,5 @@ class ParameterTest(unittest.TestCase):
         )
         x = jnp.zeros([1, 32, 32, 3])
         params = dw.init({"params": random.PRNGKey(0)}, x)["params"]
-        self.assertEqual(params["DepthwiseConv2D_0"]["weights"].shape, (3, 3, 1, 6))
+        self.assertEqual(params["DepthwiseConv2D_0"]["kernel"].shape, (3, 3, 1, 6))
         self.assertEqual(params["Conv_0"]["kernel"].shape, (1, 1, 6, 256))

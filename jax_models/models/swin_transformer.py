@@ -343,7 +343,7 @@ class SwinTransformer(nn.Module):
     Swin Transformer Module
 
     Attributes:
-        patch_size (int): Patch size. Default is 4. 
+        patch_size (int): Patch size. Default is 4.
         emb_dim (int): Embedding dimension. Default is 96.
         depths (list or tuple): Depths for every block
         num_heads (list or tuple): Number of attention heads for every stage
@@ -359,6 +359,7 @@ class SwinTransformer(nn.Module):
         deterministic (bool): Optional argument, if True, network becomes deterministic and dropout is not applied.
 
     """
+
     patch_size: int = 4
     emb_dim: int = 96
     depths: Iterable[int] = (2, 2, 6, 2)

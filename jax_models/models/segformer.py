@@ -291,7 +291,7 @@ class SegFormer(nn.Module):
     SegFormer Module
 
     Attributes:
-        patch_size (int): Patch size. Default is 4. 
+        patch_size (int): Patch size. Default is 4.
         emb_dims (list or tuple): Embedding dimension for every block.
         num_heads (list or tuple): Number of attention heads for every stage.
         mlp_ratios (int): Multiplier for hidden dimension in transformer MLP block at every stage. Default is 4 at every stage.
@@ -308,6 +308,7 @@ class SegFormer(nn.Module):
         deterministic (bool): Optional argument, if True, network becomes deterministic and dropout is not applied.
 
     """
+
     patch_size: int = 4
     emb_dims: Iterable = (64, 128, 256, 512)
     num_heads: Iterable = (1, 2, 4, 8)
@@ -361,8 +362,10 @@ def SegFormer_B0(
     **kwargs,
 ):
     if pretrained:
-        logging.info("Pretrained SegFormer_B0 isn't available. Loading un-trained model instead")
-    
+        logging.info(
+            "Pretrained SegFormer_B0 isn't available. Loading un-trained model instead"
+        )
+
     return SegFormer(
         4,
         (32, 64, 160, 256),
@@ -389,8 +392,10 @@ def SegFormer_B1(
     **kwargs,
 ):
     if pretrained:
-        logging.info("Pretrained SegFormer_B1 isn't available. Loading un-trained model instead")
-    
+        logging.info(
+            "Pretrained SegFormer_B1 isn't available. Loading un-trained model instead"
+        )
+
     return SegFormer(
         4,
         (64, 128, 320, 512),
@@ -417,8 +422,10 @@ def SegFormer_B2(
     **kwargs,
 ):
     if pretrained:
-        logging.info("Pretrained SegFormer_B2 isn't available. Loading un-trained model instead")
-    
+        logging.info(
+            "Pretrained SegFormer_B2 isn't available. Loading un-trained model instead"
+        )
+
     return SegFormer(
         4,
         (64, 128, 320, 512),
@@ -445,8 +452,10 @@ def SegFormer_B3(
     **kwargs,
 ):
     if pretrained:
-        logging.info("Pretrained SegFormer_B3 isn't available. Loading un-trained model instead")
-    
+        logging.info(
+            "Pretrained SegFormer_B3 isn't available. Loading un-trained model instead"
+        )
+
     return SegFormer(
         4,
         (64, 128, 320, 512),
@@ -473,8 +482,10 @@ def SegFormer_B4(
     **kwargs,
 ):
     if pretrained:
-        logging.info("Pretrained SegFormer_B4 isn't available. Loading un-trained model instead")
-    
+        logging.info(
+            "Pretrained SegFormer_B4 isn't available. Loading un-trained model instead"
+        )
+
     return SegFormer(
         4,
         (64, 128, 320, 512),
@@ -501,8 +512,10 @@ def SegFormer_B5(
     **kwargs,
 ):
     if pretrained:
-        logging.info("Pretrained SegFormer_B5 isn't available. Loading un-trained model instead")
-    
+        logging.info(
+            "Pretrained SegFormer_B5 isn't available. Loading un-trained model instead"
+        )
+
     return SegFormer(
         4,
         (64, 128, 320, 512),

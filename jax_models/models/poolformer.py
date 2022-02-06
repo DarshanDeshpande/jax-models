@@ -65,6 +65,7 @@ class S12(nn.Module):
     deterministic (bool): Optional argument, if True, netowrk becomes deterministic and dropout is not applied.
 
     """
+
     attach_head: bool = False
     num_classes: int = 1000
     dropout: float = 0.1
@@ -111,13 +112,14 @@ class S12(nn.Module):
 class S24(nn.Module):
     """
     S24 Module
-    
+
     attach_head (bool): Whether to attach classification head. Default is True.
     num_classes (int): Number of classification classes. Default is 1000.
     dropout (float): Dropout value. Default is 0.1.
     deterministic (bool): Optional argument, if True, netowrk becomes deterministic and dropout is not applied.
 
     """
+
     attach_head: bool = False
     num_classes: int = 1000
     dropout: float = 0.1
@@ -165,13 +167,14 @@ class S24(nn.Module):
 class S36(nn.Module):
     """
     S36 Module
-    
+
     attach_head (bool): Whether to attach classification head. Default is True.
     num_classes (int): Number of classification classes. Default is 1000.
     dropout (float): Dropout value. Default is 0.1.
     deterministic (bool): Optional argument, if True, netowrk becomes deterministic and dropout is not applied.
 
     """
+
     attach_head: bool = False
     num_classes: int = 1000
     dropout: float = 0.1
@@ -219,13 +222,14 @@ class S36(nn.Module):
 class M36(nn.Module):
     """
     M36 Module
-    
+
     attach_head (bool): Whether to attach classification head. Default is True.
     num_classes (int): Number of classification classes. Default is 1000.
     dropout (float): Dropout value. Default is 0.1.
     deterministic (bool): Optional argument, if True, netowrk becomes deterministic and dropout is not applied.
 
     """
+
     attach_head: bool = False
     num_classes: int = 1000
     dropout: float = 0.1
@@ -273,13 +277,14 @@ class M36(nn.Module):
 class M48(nn.Module):
     """
     M48 Module
-    
+
     attach_head (bool): Whether to attach classification head. Default is True.
     num_classes (int): Number of classification classes. Default is 1000.
     dropout (float): Dropout value. Default is 0.1.
     deterministic (bool): Optional argument, if True, netowrk becomes deterministic and dropout is not applied.
 
     """
+
     attach_head: bool = False
     num_classes: int = 1000
     dropout: float = 0.1
@@ -333,8 +338,10 @@ def PoolFormer_S12(
     **kwargs
 ):
     if pretrained:
-        logging.info("Pretrained PoolFormer_S12 isn't available. Loading un-trained model instead")
-    
+        logging.info(
+            "Pretrained PoolFormer_S12 isn't available. Loading un-trained model instead"
+        )
+
     return S12(attach_head, num_classes, dropout, **kwargs)
 
 
@@ -347,8 +354,10 @@ def PoolFormer_S24(
     **kwargs
 ):
     if pretrained:
-        logging.info("Pretrained PoolFormer_S24 isn't available. Loading un-trained model instead")
-    
+        logging.info(
+            "Pretrained PoolFormer_S24 isn't available. Loading un-trained model instead"
+        )
+
     return S24(attach_head, num_classes, dropout, **kwargs)
 
 
@@ -361,8 +370,10 @@ def PoolFormer_S36(
     **kwargs
 ):
     if pretrained:
-        logging.info("Pretrained PoolFormer_S36 isn't available. Loading un-trained model instead")
-    
+        logging.info(
+            "Pretrained PoolFormer_S36 isn't available. Loading un-trained model instead"
+        )
+
     return S36(attach_head, num_classes, dropout, **kwargs)
 
 
@@ -375,8 +386,10 @@ def PoolFormer_M36(
     **kwargs
 ):
     if pretrained:
-        logging.info("Pretrained PoolFormer_M36 isn't available. Loading un-trained model instead")
-    
+        logging.info(
+            "Pretrained PoolFormer_M36 isn't available. Loading un-trained model instead"
+        )
+
     return M36(attach_head, num_classes, dropout, **kwargs)
 
 
@@ -389,6 +402,8 @@ def PoolFormer_M48(
     **kwargs
 ):
     if pretrained:
-        logging.info("Pretrained PoolFormer_M48 isn't available. Loading un-trained model instead")
-    
+        logging.info(
+            "Pretrained PoolFormer_M48 isn't available. Loading un-trained model instead"
+        )
+
     return M48(attach_head, num_classes, dropout, **kwargs)

@@ -189,7 +189,7 @@ class MaskedAutoencoderViT(nn.Module):
     Masked Autoencoder Module
 
     Attributes:
-        patch_size (int): Patch size. Default is 16. 
+        patch_size (int): Patch size. Default is 16.
         emb_dim (int): Embedding dimension. Default is 1024.
         dec_emb_dim (int): Decoder embedding dimension. Default is 512.
         depth (int): Depth for encoder block.
@@ -204,6 +204,7 @@ class MaskedAutoencoderViT(nn.Module):
         deterministic (bool): Optional argument, if True, network becomes deterministic and dropout is not applied.
 
     """
+
     patch_size: int = 16
     emb_dim: int = 1024
     dec_emb_dim: int = 512
@@ -264,10 +265,10 @@ def MAE_Base(
         "Default classification arguments are ignored since this is a generative model. To tune the hyperparameters, please call `MaskedAutoencoderViT` separately with your desired arguments."
     )
     del attach_head, num_classes, dropout
-    
+
     if pretrained:
         logging.info("Pretrained MAE Base isn't available. Loading un-trained model.")
-    
+
     return MaskedAutoencoderViT(
         patch_size=16,
         emb_dim=768,
@@ -296,7 +297,7 @@ def MAE_Large(
 
     if pretrained:
         logging.info("Pretrained MAE Large isn't available. Loading un-trained model.")
-    
+
     return MaskedAutoencoderViT(
         patch_size=16,
         emb_dim=1024,
@@ -325,7 +326,7 @@ def MAE_Huge(
 
     if pretrained:
         logging.info("Pretrained MAE Huge isn't available. Loading un-trained model.")
-    
+
     return MaskedAutoencoderViT(
         patch_size=14,
         emb_dim=1280,

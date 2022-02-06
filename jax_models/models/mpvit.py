@@ -352,6 +352,7 @@ class MPViT(nn.Module):
         deterministic (bool): Optional argument, if True, network becomes deterministic and dropout is not applied.
 
     """
+
     mlp_ratio: int = 2
     channels_list: Iterable[int] = (64, 96, 176, 216)
     num_layers_list: Iterable[int] = (1, 2, 4, 1)
@@ -399,8 +400,10 @@ def MPViT_Tiny(
     **kwargs,
 ):
     if pretrained:
-        logging.info("Pretrained model for MPViT tiny isn't available. Loading un-trained model instead")
-    
+        logging.info(
+            "Pretrained model for MPViT tiny isn't available. Loading un-trained model instead"
+        )
+
     return MPViT(
         mlp_ratio=2,
         channels_list=(64, 96, 176, 216),
@@ -422,8 +425,10 @@ def MPViT_XSmall(
     **kwargs,
 ):
     if pretrained:
-        logging.info("Pretrained model for MPViT XSmall isn't available. Loading un-trained model instead")
-    
+        logging.info(
+            "Pretrained model for MPViT XSmall isn't available. Loading un-trained model instead"
+        )
+
     return MPViT(
         mlp_ratio=4,
         channels_list=(64, 128, 192, 256),
@@ -445,8 +450,10 @@ def MPViT_Small(
     **kwargs,
 ):
     if pretrained:
-        logging.info("Pretrained model for MPViT Small isn't available. Loading un-trained model instead")
-    
+        logging.info(
+            "Pretrained model for MPViT Small isn't available. Loading un-trained model instead"
+        )
+
     return MPViT(
         mlp_ratio=4,
         channels_list=(64, 128, 216, 288),
@@ -468,8 +475,10 @@ def MPViT_Base(
     **kwargs,
 ):
     if pretrained:
-        logging.info("Pretrained model for MPViT Base isn't available. Loading un-trained model instead")
-    
+        logging.info(
+            "Pretrained model for MPViT Base isn't available. Loading un-trained model instead"
+        )
+
     return MPViT(
         mlp_ratio=4,
         channels_list=(128, 224, 368, 480),
