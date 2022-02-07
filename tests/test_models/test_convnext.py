@@ -19,14 +19,18 @@ class TestConvNeXt(unittest.TestCase):
         x = jnp.zeros([1, 224, 224, 3])
         y = jnp.zeros([1, 384, 384, 3])
 
-        convnext, params = ConvNeXt_Tiny(pretrained=True, download_dir="weights/convnext")
+        convnext, params = ConvNeXt_Tiny(
+            pretrained=True, download_dir="weights/convnext"
+        )
         convnext.apply(
             {"params": params},
             x,
             True,
         )
 
-        convnext, params = ConvNeXt_Small(pretrained=True, download_dir="weights/convnext")
+        convnext, params = ConvNeXt_Small(
+            pretrained=True, download_dir="weights/convnext"
+        )
         convnext.apply(
             {"params": params},
             x,
