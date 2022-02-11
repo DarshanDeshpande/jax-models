@@ -2,8 +2,7 @@ import jax.numpy as jnp
 from jax.image import resize
 import flax.linen as nn
 
-from ..layers import DropPath
-from ..layers import TransformerMLP
+from ..layers import DropPath, TransformerMLP, OverlapPatchEmbed
 
 from typing import Optional, Iterable, Any
 import logging
@@ -109,21 +108,6 @@ class Block(nn.Module):
         )(x, deterministic)
         x = DropPath(self.drop_path)(x, deterministic)
         return inputs + x
-
-
-class OverlapPatchEmbed(nn.Module):
-    emb_dim: int = 768
-    patch_size: int = 16
-    stride: int = 4
-
-    @nn.compact
-    def __call__(self, inputs):
-        conv = nn.Conv(self.emb_dim, (self.patch_size, self.patch_size), self.stride)(
-            inputs
-        )
-        flat = jnp.reshape(conv, (conv.shape[0], -1, conv.shape[-1]))
-        norm = nn.LayerNorm()(flat)
-        return norm
 
 
 class MixTransformer(nn.Module):

@@ -48,6 +48,7 @@ Available model implementations for JAX are:
 7. <a href="https://arxiv.org/abs/2201.03545">A ConvNet for the 2020s</a> (Zhuang Liu et al., 2021)
 8. <a href="https://arxiv.org/abs/2111.06377v1">Masked Autoencoders Are Scalable Vision Learners</a> (Kaiming He et al., 2021)
 9. <a href="https://arxiv.org/abs/2103.14030">Swin Transformer: Hierarchical Vision Transformer using Shifted Windows</a> (Ze Liu et al., 2021)
+10. <a href="https://arxiv.org/abs/2102.12122">Pyramid Vision Transformer: A Versatile Backbone for Dense Prediction without Convolutions</a> (Wenhai Wang et al., 2021)
 
 <br>
 Available layers for out-of-the-box integration:

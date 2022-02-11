@@ -7,6 +7,7 @@ from .segformer import *
 from .convnext import *
 from .masked_autoencoder import *
 from .swin_transformer import *
+from .pvit import *
 
 import fnmatch
 
@@ -68,6 +69,13 @@ model_dict = {
     "swin-base-384": SwinBase384,
     "swin-large-224": SwinLarge224,
     "swin-large-384": SwinLarge384,
+    "pvit-b0": PViT_B0,
+    "pvit-b1": PViT_B1,
+    "pvit-b2": PViT_B2,
+    "pvit-b2-linear": PViT_B2_Linear,
+    "pvit-b3": PViT_B3,
+    "pvit-b4": PViT_B4,
+    "pvit-b5": PViT_B5,
 }
 
 

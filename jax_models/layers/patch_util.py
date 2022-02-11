@@ -45,3 +45,25 @@ class PatchEmbed(nn.Module):
         if self.use_norm:
             x = nn.LayerNorm(name="norm", epsilon=1e-5)(x)
         return x
+
+
+class OverlapPatchEmbed(nn.Module):
+    emb_dim: int = 768
+    patch_size: int = 16
+    stride: int = 4
+
+    @nn.compact
+    def __call__(self, inputs):
+        conv = nn.Conv(
+            self.emb_dim,
+            (self.patch_size, self.patch_size),
+            self.stride,
+            padding=(
+                (self.patch_size // 2, self.patch_size // 2),
+                (self.patch_size // 2, self.patch_size // 2),
+            ),
+            name="proj",
+        )(inputs)
+        flat = jnp.reshape(conv, (conv.shape[0], -1, conv.shape[-1]))
+        norm = nn.LayerNorm(name="norm")(flat)
+        return norm
