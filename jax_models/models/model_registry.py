@@ -8,6 +8,7 @@ from .convnext import *
 from .masked_autoencoder import *
 from .swin_transformer import *
 from .pvit import *
+from .cait import *
 
 import fnmatch
 
@@ -76,6 +77,16 @@ model_dict = {
     "pvit-b3": PViT_B3,
     "pvit-b4": PViT_B4,
     "pvit-b5": PViT_B5,
+    "cait-xxs24-224": XXS24_224,
+    "cait-xxs24-384": XXS24_384,
+    "cait-xxs36-224": XXS36_224,
+    "cait-xxs36-384": XXS36_384,
+    "cait-xs24-384": XS24_384,
+    "cait-s24-224": S24_224,
+    "cait-s24-384": S24_384,
+    "cait-s36-384": S36_384,
+    "cait-m36-384": M36_384,
+    "cait-m48-448": M48_448,
 }
 
 

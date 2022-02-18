@@ -8,5 +8,6 @@ from . import segformer
 from . import masked_autoencoder
 from . import swin_transformer
 from . import pvit
+from . import cait
 from .model_registry import list_models, load_model
 from .helper import load_trained_params, save_trained_params, download_checkpoint_params
