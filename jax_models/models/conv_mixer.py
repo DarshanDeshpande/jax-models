@@ -2,6 +2,7 @@ import jax.numpy as jnp
 import flax.linen as nn
 
 from ..layers import DepthwiseConv2D
+from .model_registry import register_model
 
 from typing import Optional
 import logging
@@ -10,10 +11,10 @@ logging.basicConfig(format="%(levelname)s:%(message)s", level=logging.INFO)
 
 __all__ = [
     "ConvMixer",
-    "ConvMixer_512_12",
-    "ConvMixer_768_32",
-    "ConvMixer_1024_20",
-    "ConvMixer_1536_20",
+    "convmixer_512_12",
+    "convmixer_768_32",
+    "convmixer_1024_20",
+    "convmixer_1536_20",
 ]
 
 
@@ -79,7 +80,8 @@ class ConvMixer(nn.Module):
         return x
 
 
-def ConvMixer_1536_20(
+@register_model
+def convmixer_1536_20(
     attach_head=False,
     num_classes=1000,
     dropout=None,
@@ -94,7 +96,8 @@ def ConvMixer_1536_20(
     return ConvMixer(1536, 7, 20, 9, attach_head, num_classes, **kwargs)
 
 
-def ConvMixer_768_32(
+@register_model
+def convmixer_768_32(
     attach_head=False,
     num_classes=1000,
     dropout=None,
@@ -109,7 +112,8 @@ def ConvMixer_768_32(
     return ConvMixer(768, 7, 32, 7, attach_head, num_classes, **kwargs)
 
 
-def ConvMixer_512_12(
+@register_model
+def convmixer_512_12(
     attach_head=False,
     num_classes=1000,
     dropout=None,
@@ -124,7 +128,8 @@ def ConvMixer_512_12(
     return ConvMixer(512, 7, 12, 8, attach_head, num_classes, **kwargs)
 
 
-def ConvMixer_1024_20(
+@register_model
+def convmixer_1024_20(
     attach_head=False,
     num_classes=1000,
     dropout=None,

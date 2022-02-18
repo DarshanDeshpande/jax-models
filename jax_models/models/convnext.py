@@ -4,6 +4,7 @@ import flax.linen as nn
 
 from ..layers import DepthwiseConv2D, DropPath
 from .helper import load_trained_params, download_checkpoint_params
+from .model_registry import register_model
 
 from typing import Optional, Iterable
 import logging
@@ -12,21 +13,21 @@ logging.basicConfig(format="%(levelname)s:%(message)s", level=logging.INFO)
 
 __all__ = [
     "ConvNeXt",
-    "ConvNeXt_Tiny",
-    "ConvNeXt_Small",
-    "ConvNeXt_Base_224_1K",
-    "ConvNeXt_Base_224_22K",
-    "ConvNeXt_Base_224_22K_1K",
-    "ConvNeXt_Base_384_1K",
-    "ConvNeXt_Base_384_22K_1K",
-    "ConvNeXt_Large_224_1K",
-    "ConvNeXt_Large_224_22K",
-    "ConvNeXt_Large_224_22K_1K",
-    "ConvNeXt_Large_384_1K",
-    "ConvNeXt_Large_384_22K_1K",
-    "ConvNeXt_XLarge_224_22K",
-    "ConvNeXt_XLarge_224_22K_1K",
-    "ConvNeXt_XLarge_384_22K_1K",
+    "convnext_tiny",
+    "convnext_small",
+    "convnext_base_224_1K",
+    "convnext_base_224_22K",
+    "convnext_base_224_22K_1K",
+    "convnext_base_384_1K",
+    "convnext_base_384_22K_1K",
+    "convnext_large_224_1K",
+    "convnext_large_224_22K",
+    "convnext_large_224_22K_1K",
+    "convnext_large_384_1K",
+    "convnext_large_384_22K_1K",
+    "convnext_xlarge_224_22K",
+    "convnext_xlarge_224_22K_1K",
+    "convnext_xlarge_384_22K_1K",
 ]
 
 pretrained_cfgs = {
@@ -156,7 +157,8 @@ class ConvNeXt(nn.Module):
         return x
 
 
-def ConvNeXt_Tiny(
+@register_model
+def convnext_tiny(
     attach_head=False,
     num_classes=1000,
     dropout=0.0,
@@ -185,7 +187,8 @@ def ConvNeXt_Tiny(
         return model
 
 
-def ConvNeXt_Small(
+@register_model
+def convnext_small(
     attach_head=True,
     num_classes=1000,
     dropout=0.0,
@@ -214,7 +217,8 @@ def ConvNeXt_Small(
         return model
 
 
-def ConvNeXt_Base_224_1K(
+@register_model
+def convnext_base_224_1K(
     attach_head=True,
     num_classes=1000,
     dropout=0.0,
@@ -242,7 +246,8 @@ def ConvNeXt_Base_224_1K(
         return model
 
 
-def ConvNeXt_Base_224_22K_1K(
+@register_model
+def convnext_base_224_22K_1K(
     attach_head=True,
     num_classes=1000,
     dropout=0.0,
@@ -270,7 +275,8 @@ def ConvNeXt_Base_224_22K_1K(
         return model
 
 
-def ConvNeXt_Base_224_22K(
+@register_model
+def convnext_base_224_22K(
     attach_head=True,
     num_classes=21841,
     dropout=0.0,
@@ -298,7 +304,8 @@ def ConvNeXt_Base_224_22K(
         return model
 
 
-def ConvNeXt_Base_384_22K_1K(
+@register_model
+def convnext_base_384_22K_1K(
     attach_head=True,
     num_classes=1000,
     dropout=0.0,
@@ -326,7 +333,8 @@ def ConvNeXt_Base_384_22K_1K(
         return model
 
 
-def ConvNeXt_Base_384_1K(
+@register_model
+def convnext_base_384_1K(
     attach_head=True,
     num_classes=1000,
     dropout=0.0,
@@ -354,7 +362,8 @@ def ConvNeXt_Base_384_1K(
         return model
 
 
-def ConvNeXt_Large_224_1K(
+@register_model
+def convnext_large_224_1K(
     attach_head=True,
     num_classes=1000,
     dropout=0.0,
@@ -382,7 +391,8 @@ def ConvNeXt_Large_224_1K(
         return model
 
 
-def ConvNeXt_Large_224_22K_1K(
+@register_model
+def convnext_large_224_22K_1K(
     attach_head=True,
     num_classes=1000,
     dropout=0.0,
@@ -410,7 +420,8 @@ def ConvNeXt_Large_224_22K_1K(
         return model
 
 
-def ConvNeXt_Large_224_22K(
+@register_model
+def convnext_large_224_22K(
     attach_head=True,
     num_classes=21841,
     dropout=0.0,
@@ -438,7 +449,8 @@ def ConvNeXt_Large_224_22K(
         return model
 
 
-def ConvNeXt_Large_384_1K(
+@register_model
+def convnext_large_384_1K(
     attach_head=True,
     num_classes=1000,
     dropout=0.0,
@@ -466,7 +478,8 @@ def ConvNeXt_Large_384_1K(
         return model
 
 
-def ConvNeXt_Large_384_22K_1K(
+@register_model
+def convnext_large_384_22K_1K(
     attach_head=True,
     num_classes=1000,
     dropout=0.0,
@@ -494,7 +507,8 @@ def ConvNeXt_Large_384_22K_1K(
         return model
 
 
-def ConvNeXt_XLarge_224_22K_1K(
+@register_model
+def convnext_xlarge_224_22K_1K(
     attach_head=True,
     num_classes=1000,
     dropout=0.0,
@@ -522,7 +536,8 @@ def ConvNeXt_XLarge_224_22K_1K(
         return model
 
 
-def ConvNeXt_XLarge_224_22K(
+@register_model
+def convnext_xlarge_224_22K(
     attach_head=True,
     num_classes=21841,
     dropout=0.0,
@@ -550,7 +565,8 @@ def ConvNeXt_XLarge_224_22K(
         return model
 
 
-def ConvNeXt_XLarge_224_22K_1K(
+@register_model
+def convnext_xlarge_224_22K_1K(
     attach_head=True,
     num_classes=1000,
     dropout=0.0,
@@ -578,7 +594,8 @@ def ConvNeXt_XLarge_224_22K_1K(
         return model
 
 
-def ConvNeXt_XLarge_384_22K_1K(
+@register_model
+def convnext_xlarge_384_22K_1K(
     attach_head=True,
     num_classes=1000,
     dropout=0.0,

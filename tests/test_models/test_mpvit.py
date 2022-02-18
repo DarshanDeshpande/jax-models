@@ -10,7 +10,7 @@ from jax_models.models.mpvit import (
     FactorizedAttention,
     MultiPathTransformerBlock,
 )
-from jax_models.models.mpvit import MPViT_Tiny, MPViT_XSmall, MPViT_Small, MPViT_Base
+from jax_models.models.mpvit import *
 
 
 class Layer_Tests(unittest.TestCase):
@@ -95,7 +95,7 @@ class Layer_Tests(unittest.TestCase):
 class MPViT_Tests(unittest.TestCase):
     def test_tiny(self):
         drop, key = random.split(random.PRNGKey(0), 2)
-        model = MPViT_Tiny(attach_head=False)
+        model = mpvit_tiny(attach_head=False)
         x = jnp.zeros([1, 224, 224, 3])
         variables = model.init({"params": key, "dropout": drop}, x, True)
         params, batch_stats = variables["params"], variables["batch_stats"]
@@ -110,7 +110,7 @@ class MPViT_Tests(unittest.TestCase):
 
     def test_xsmall(self):
         drop, key = random.split(random.PRNGKey(0), 2)
-        model = MPViT_XSmall(attach_head=False)
+        model = mpvit_xsmall(attach_head=False)
         x = jnp.zeros([1, 224, 224, 3])
         variables = model.init({"params": key, "dropout": drop}, x, True)
         params, batch_stats = variables["params"], variables["batch_stats"]
@@ -125,7 +125,7 @@ class MPViT_Tests(unittest.TestCase):
 
     def test_small(self):
         drop, key = random.split(random.PRNGKey(0), 2)
-        model = MPViT_Small(attach_head=False)
+        model = mpvit_small(attach_head=False)
         x = jnp.zeros([1, 224, 224, 3])
         variables = model.init({"params": key, "dropout": drop}, x, True)
         params, batch_stats = variables["params"], variables["batch_stats"]
@@ -140,7 +140,7 @@ class MPViT_Tests(unittest.TestCase):
 
     def test_base(self):
         drop, key = random.split(random.PRNGKey(0), 2)
-        model = MPViT_Base(attach_head=False)
+        model = mpvit_base(attach_head=False)
         x = jnp.zeros([1, 224, 224, 3])
         variables = model.init({"params": key, "dropout": drop}, x, True)
         params, batch_stats = variables["params"], variables["batch_stats"]

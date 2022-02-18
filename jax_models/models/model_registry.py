@@ -1,93 +1,14 @@
-from .conv_mixer import *
-from .mlp_mixer import *
-from .mpvit import *
-from .patchconvnet import *
-from .poolformer import *
-from .segformer import *
-from .convnext import *
-from .masked_autoencoder import *
-from .swin_transformer import *
-from .pvit import *
-from .cait import *
-
 import fnmatch
+import re
+
+model_dict = {}
 
 
-model_dict = {
-    "mpvit-tiny": MPViT_Tiny,
-    "mpvit-xsmall": MPViT_XSmall,
-    "mpvit-small": MPViT_Small,
-    "mpvit-base": MPViT_Base,
-    "patchconvnet-s60": PatchConvNet_S60,
-    "patchconvnet-s120": PatchConvNet_S120,
-    "patchconvnet-b60": PatchConvNet_B60,
-    "patchconvnet-b120": PatchConvNet_B120,
-    "patchconvnet-l60": PatchConvNet_L60,
-    "patchconvnet-l120": PatchConvNet_L120,
-    "poolformer-s12": PoolFormer_S12,
-    "poolformer-s24": PoolFormer_S24,
-    "poolformer-s36": PoolFormer_S36,
-    "poolformer-m36": PoolFormer_M36,
-    "poolformer-m48": PoolFormer_M48,
-    "mlpmixer-s16": MLPMixer_S16,
-    "mlpmixer-s32": MLPMixer_S32,
-    "mlpmixer-b32": MLPMixer_B32,
-    "mlpmixer-l16": MLPMixer_L16,
-    "mlpmixer-l32": MLPMixer_L32,
-    "mlpmixer-h14": MLPMixer_H14,
-    "convmixer-1536-20": ConvMixer_1536_20,
-    "convmixer-1024-20": ConvMixer_1024_20,
-    "convmixer-768-32": ConvMixer_768_32,
-    "convmixer-512-12": ConvMixer_512_12,
-    "segformer-b0": SegFormer_B0,
-    "segformer-b1": SegFormer_B1,
-    "segformer-b2": SegFormer_B2,
-    "segformer-b3": SegFormer_B3,
-    "segformer-b4": SegFormer_B4,
-    "segformer-b5": SegFormer_B5,
-    "convnext": ConvNeXt,
-    "convnext-tiny-224-1k": ConvNeXt_Tiny,
-    "convnext-small-224-1k": ConvNeXt_Small,
-    "convnext-base-224-1k": ConvNeXt_Base_224_1K,
-    "convnext-base-224-22k-1k": ConvNeXt_Base_224_22K_1K,
-    "convnext-base-224-22k": ConvNeXt_Base_224_22K,
-    "convnext-base-384-22k-1k": ConvNeXt_Base_384_22K_1K,
-    "convnext-base-384-22k": ConvNeXt_Base_384_1K,
-    "convnext-large-224-1k": ConvNeXt_Large_224_1K,
-    "convnext-large-224-22k-1k": ConvNeXt_Large_224_22K_1K,
-    "convnext-large-224-22k": ConvNeXt_Large_224_22K,
-    "convnext-large-384-1k": ConvNeXt_Large_384_1K,
-    "convnext-large-384-22k-1k": ConvNeXt_Large_384_22K_1K,
-    "convnext-xlarge-224-22k-1k": ConvNeXt_XLarge_224_22K_1K,
-    "convnext-xlarge-224-22k": ConvNeXt_XLarge_224_22K,
-    "convnext-xlarge-384-22k-1k": ConvNeXt_XLarge_384_22K_1K,
-    "mae-base": MAE_Base,
-    "mae-large": MAE_Large,
-    "mae-huge": MAE_Huge,
-    "swin-tiny-224": SwinTiny224,
-    "swin-small-224": SwinSmall224,
-    "swin-base-224": SwinBase224,
-    "swin-base-384": SwinBase384,
-    "swin-large-224": SwinLarge224,
-    "swin-large-384": SwinLarge384,
-    "pvit-b0": PViT_B0,
-    "pvit-b1": PViT_B1,
-    "pvit-b2": PViT_B2,
-    "pvit-b2-linear": PViT_B2_Linear,
-    "pvit-b3": PViT_B3,
-    "pvit-b4": PViT_B4,
-    "pvit-b5": PViT_B5,
-    "cait-xxs24-224": XXS24_224,
-    "cait-xxs24-384": XXS24_384,
-    "cait-xxs36-224": XXS36_224,
-    "cait-xxs36-384": XXS36_384,
-    "cait-xs24-384": XS24_384,
-    "cait-s24-224": S24_224,
-    "cait-s24-384": S24_384,
-    "cait-s36-384": S36_384,
-    "cait-m36-384": M36_384,
-    "cait-m48-448": M48_448,
-}
+def register_model(function):
+    model_name = function.__name__
+    model_name = re.sub("_", "-", model_name.lower())
+    model_dict[model_name] = function
+    return function
 
 
 def list_models(filter=""):

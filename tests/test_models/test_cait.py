@@ -41,70 +41,70 @@ class TestmodelTransformer(unittest.TestCase):
         y = jnp.zeros([1, 384, 384, 3])
         z = jnp.zeros([1, 448, 448, 3])
 
-        model, params = XXS24_224(pretrained=True, download_dir="weights/cait_weights/")
+        model, params = cait_xxs24_224(pretrained=True, download_dir="weights/cait_weights/")
         model.apply(
             {"params": params},
             x,
             True,
         )
 
-        model, params = XXS24_384(pretrained=True, download_dir="weights/cait_weights/")
+        model, params = cait_xxs24_384(pretrained=True, download_dir="weights/cait_weights/")
         model.apply(
             {"params": params},
             y,
             True,
         )
 
-        model, params = XXS36_224(pretrained=True, download_dir="weights/cait_weights/")
+        model, params = cait_xxs36_224(pretrained=True, download_dir="weights/cait_weights/")
         model.apply(
             {"params": params},
             x,
             True,
         )
 
-        model, params = XXS36_384(pretrained=True, download_dir="weights/cait_weights/")
+        model, params = cait_xxs36_384(pretrained=True, download_dir="weights/cait_weights/")
         model.apply(
             {"params": params},
             y,
             True,
         )
 
-        model, params = XS24_384(pretrained=True, download_dir="weights/cait_weights/")
+        model, params = cait_xs24_384(pretrained=True, download_dir="weights/cait_weights/")
         model.apply(
             {"params": params},
             y,
             True,
         )
 
-        model, params = S24_224(pretrained=True, download_dir="weights/cait_weights/")
+        model, params = cait_s24_224(pretrained=True, download_dir="weights/cait_weights/")
         model.apply(
             {"params": params},
             x,
             True,
         )
 
-        model, params = S24_384(pretrained=True, download_dir="weights/cait_weights/")
+        model, params = cait_s24_384(pretrained=True, download_dir="weights/cait_weights/")
         model.apply(
             {"params": params},
             y,
             True,
         )
 
-        model, params = S36_384(pretrained=True, download_dir="weights/cait_weights/")
+        model, params = cait_s36_384(pretrained=True, download_dir="weights/cait_weights/")
         model.apply(
             {"params": params},
             y,
             True,
         )
 
-        model, params = M36_384(pretrained=True, download_dir="weights/cait_weights/")
+        model, params = cait_m36_384(pretrained=True, download_dir="weights/cait_weights/")
         model.apply(
             {"params": params},
             y,
             True,
         )
 
-        model, params = M48_448(pretrained=True, download_dir="weights/cait_weights/")
+        model, params = cait_m48_448(pretrained=True, download_dir="weights/cait_weights/")
         model.apply(
             {"params": params},
             z,

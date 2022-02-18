@@ -6,12 +6,14 @@ import jax.numpy as jnp
 
 import flax.linen as nn
 from ..layers import Attention, DropPath, TransformerMLP, Mask, PatchEmbed
+from .model_registry import register_model
+
 from typing import Optional
 import logging
 
 logging.basicConfig(format="%(levelname)s:%(message)s", level=logging.INFO)
 
-__all__ = ["MaskedAutoencoderViT", "MAE_Base", "MAE_Large", "MAE_Huge"]
+__all__ = ["MaskedAutoencoderViT", "mae_base", "mae_large", "mae_huge"]
 
 
 def sincosemb1d(emb_dim, pos):
@@ -253,7 +255,8 @@ class MaskedAutoencoderViT(nn.Module):
         return x, mask
 
 
-def MAE_Base(
+@register_model
+def mae_base(
     attach_head=None,
     num_classes=None,
     dropout=None,
@@ -282,7 +285,8 @@ def MAE_Base(
     )
 
 
-def MAE_Large(
+@register_model
+def mae_large(
     attach_head=None,
     num_classes=None,
     dropout=None,
@@ -311,7 +315,8 @@ def MAE_Large(
     )
 
 
-def MAE_Huge(
+@register_model
+def mae_huge(
     attach_head=None,
     num_classes=None,
     dropout=None,

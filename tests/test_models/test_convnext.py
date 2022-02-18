@@ -19,7 +19,7 @@ class TestConvNeXt(unittest.TestCase):
         x = jnp.zeros([1, 224, 224, 3])
         y = jnp.zeros([1, 384, 384, 3])
 
-        convnext, params = ConvNeXt_Tiny(
+        convnext, params = convnext_tiny(
             pretrained=True, download_dir="weights/convnext"
         )
         convnext.apply(
@@ -28,7 +28,7 @@ class TestConvNeXt(unittest.TestCase):
             True,
         )
 
-        convnext, params = ConvNeXt_Small(
+        convnext, params = convnext_small(
             pretrained=True, download_dir="weights/convnext"
         )
         convnext.apply(
@@ -37,7 +37,7 @@ class TestConvNeXt(unittest.TestCase):
             True,
         )
 
-        convnext, params = ConvNeXt_Base_224_1K(
+        convnext, params = convnext_base_224_1K(
             pretrained=True, download_dir="weights/convnext"
         )
         convnext.apply(
@@ -46,7 +46,7 @@ class TestConvNeXt(unittest.TestCase):
             True,
         )
 
-        convnext, params = ConvNeXt_Base_224_22K(
+        convnext, params = convnext_base_224_22K(
             pretrained=True, download_dir="weights/convnext"
         )
         convnext.apply(
@@ -55,7 +55,7 @@ class TestConvNeXt(unittest.TestCase):
             True,
         )
 
-        convnext, params = ConvNeXt_Base_224_22K_1K(
+        convnext, params = convnext_base_224_22K_1K(
             pretrained=True, download_dir="weights/convnext"
         )
         convnext.apply(
@@ -64,7 +64,7 @@ class TestConvNeXt(unittest.TestCase):
             True,
         )
 
-        convnext, params = ConvNeXt_Base_384_1K(
+        convnext, params = convnext_base_384_1K(
             pretrained=True, download_dir="weights/convnext"
         )
         convnext.apply(
@@ -73,7 +73,7 @@ class TestConvNeXt(unittest.TestCase):
             True,
         )
 
-        convnext, params = ConvNeXt_Base_384_22K_1K(
+        convnext, params = convnext_base_384_22K_1K(
             pretrained=True, download_dir="weights/convnext"
         )
         convnext.apply(
@@ -82,7 +82,7 @@ class TestConvNeXt(unittest.TestCase):
             True,
         )
 
-        convnext, params = ConvNeXt_Large_224_1K(
+        convnext, params = convnext_large_224_1K(
             pretrained=True, download_dir="weights/convnext"
         )
         convnext.apply(
@@ -91,7 +91,7 @@ class TestConvNeXt(unittest.TestCase):
             True,
         )
 
-        convnext, params = ConvNeXt_Large_224_22K(
+        convnext, params = convnext_large_224_22K(
             pretrained=True, download_dir="weights/convnext"
         )
         convnext.apply(
@@ -100,7 +100,7 @@ class TestConvNeXt(unittest.TestCase):
             True,
         )
 
-        convnext, params = ConvNeXt_Large_224_22K_1K(
+        convnext, params = convnext_large_224_22K_1K(
             pretrained=True, download_dir="weights/convnext"
         )
         convnext.apply(
@@ -109,7 +109,7 @@ class TestConvNeXt(unittest.TestCase):
             True,
         )
 
-        convnext, params = ConvNeXt_Large_384_1K(
+        convnext, params = convnext_large_384_1K(
             pretrained=True, download_dir="weights/convnext"
         )
         convnext.apply(
@@ -118,7 +118,7 @@ class TestConvNeXt(unittest.TestCase):
             True,
         )
 
-        convnext, params = ConvNeXt_Large_384_22K_1K(
+        convnext, params = convnext_large_384_22K_1K(
             pretrained=True, download_dir="weights/convnext"
         )
         convnext.apply(
@@ -127,7 +127,7 @@ class TestConvNeXt(unittest.TestCase):
             True,
         )
 
-        convnext, params = ConvNeXt_XLarge_224_22K(
+        convnext, params = convnext_xlarge_224_22K(
             pretrained=True, download_dir="weights/convnext"
         )
         convnext.apply(
@@ -136,7 +136,7 @@ class TestConvNeXt(unittest.TestCase):
             True,
         )
 
-        convnext, params = ConvNeXt_XLarge_224_22K_1K(
+        convnext, params = convnext_xlarge_224_22K_1K(
             pretrained=True, download_dir="weights/convnext"
         )
         convnext.apply(
@@ -145,7 +145,7 @@ class TestConvNeXt(unittest.TestCase):
             True,
         )
 
-        convnext, params = ConvNeXt_XLarge_384_22K_1K(
+        convnext, params = convnext_xlarge_384_22K_1K(
             pretrained=True, download_dir="weights/convnext"
         )
         convnext.apply(

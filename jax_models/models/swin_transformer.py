@@ -7,17 +7,18 @@ import flax.linen as nn
 
 from ..layers import PatchEmbed, TransformerMLP, DropPath, AdaptiveAveragePool1D
 from ..models.helper import load_trained_params, download_checkpoint_params
+from .model_registry import register_model
 
 from typing import Iterable, Optional
 
 __all__ = [
     "SwinTransformer",
-    "SwinTiny224",
-    "SwinSmall224",
-    "SwinBase224",
-    "SwinBase384",
-    "SwinLarge224",
-    "SwinLarge384",
+    "swin_tiny_224",
+    "swin_small_224",
+    "swin_base_224",
+    "swin_base_384",
+    "swin_large_224",
+    "swin_large_384",
 ]
 
 pretrained_cfgs = {
@@ -430,7 +431,8 @@ class SwinTransformer(nn.Module):
         return x
 
 
-def SwinTiny224(
+@register_model
+def swin_tiny_224(
     attach_head=True, num_classes=1000, dropout=0.0, pretrained=False, download_dir=None
 ):
     model = SwinTransformer(
@@ -460,7 +462,8 @@ def SwinTiny224(
         return model
 
 
-def SwinSmall224(
+@register_model
+def swin_small_224(
     attach_head=True, num_classes=1000, dropout=0.0, pretrained=False, download_dir=None
 ):
     model = SwinTransformer(
@@ -490,7 +493,8 @@ def SwinSmall224(
         return model
 
 
-def SwinBase224(
+@register_model
+def swin_base_224(
     attach_head=True,
     num_classes=21841,
     dropout=0.0,
@@ -524,7 +528,8 @@ def SwinBase224(
         return model
 
 
-def SwinLarge224(
+@register_model
+def swin_large_224(
     attach_head=True,
     num_classes=21841,
     dropout=0.0,
@@ -558,7 +563,8 @@ def SwinLarge224(
         return model
 
 
-def SwinBase384(
+@register_model
+def swin_base_384(
     attach_head=True,
     num_classes=21841,
     dropout=0.0,
@@ -592,7 +598,8 @@ def SwinBase384(
         return model
 
 
-def SwinLarge384(
+@register_model
+def swin_large_384(
     attach_head=True,
     num_classes=21841,
     dropout=0.0,

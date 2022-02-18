@@ -86,7 +86,7 @@ git clone https://github.com/DarshanDeshpande/jax-models.git
 To see all model architectures available:
 
 ```py
-from jax_models.models.model_registry import list_models
+from jax_models import list_models
 from pprint import pprint
 
 pprint(list_models())
@@ -95,7 +95,7 @@ pprint(list_models())
 To load your desired model:
 
 ```py
-from jax_models.models.model_registry import load_model
+from jax_models import load_model
 load_model('swin-tiny-224', attach_head=True, num_classes=1000, dropout=0.0, pretrained=True)
 ```
 

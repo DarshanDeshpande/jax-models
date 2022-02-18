@@ -2,6 +2,7 @@ import jax.numpy as jnp
 import flax.linen as nn
 
 from ..layers import TransformerMLP
+from .model_registry import register_model
 
 from typing import Optional
 import logging
@@ -9,11 +10,11 @@ import logging
 logging.basicConfig(format="%(levelname)s:%(message)s", level=logging.INFO)
 
 __all__ = [
-    "PoolFormer_S12",
-    "PoolFormer_S24",
-    "PoolFormer_S36",
-    "PoolFormer_M36",
-    "PoolFormer_M48",
+    "poolformer_s12",
+    "poolformer_s24",
+    "poolformer_s36",
+    "poolformer_m36",
+    "poolformer_m48",
 ]
 
 
@@ -329,7 +330,8 @@ class M48(nn.Module):
         return x
 
 
-def PoolFormer_S12(
+@register_model
+def poolformer_s12(
     attach_head=False,
     num_classes=1000,
     dropout=0.1,
@@ -345,7 +347,8 @@ def PoolFormer_S12(
     return S12(attach_head, num_classes, dropout, **kwargs)
 
 
-def PoolFormer_S24(
+@register_model
+def poolformer_s24(
     attach_head=False,
     num_classes=1000,
     dropout=0.1,
@@ -361,7 +364,8 @@ def PoolFormer_S24(
     return S24(attach_head, num_classes, dropout, **kwargs)
 
 
-def PoolFormer_S36(
+@register_model
+def poolformer_s36(
     attach_head=False,
     num_classes=1000,
     dropout=0.1,
@@ -377,7 +381,8 @@ def PoolFormer_S36(
     return S36(attach_head, num_classes, dropout, **kwargs)
 
 
-def PoolFormer_M36(
+@register_model
+def poolformer_m36(
     attach_head=False,
     num_classes=1000,
     dropout=0.1,
@@ -393,7 +398,8 @@ def PoolFormer_M36(
     return M36(attach_head, num_classes, dropout, **kwargs)
 
 
-def PoolFormer_M48(
+@register_model
+def poolformer_m48(
     attach_head=False,
     num_classes=1000,
     dropout=0.1,

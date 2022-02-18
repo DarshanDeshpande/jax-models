@@ -2,6 +2,7 @@ import jax.numpy as jnp
 
 import flax.linen as nn
 from ..layers import TransformerMLP
+from .model_registry import register_model
 
 from typing import Optional
 import logging
@@ -11,12 +12,12 @@ logging.basicConfig(format="%(levelname)s:%(message)s", level=logging.INFO)
 
 __all__ = [
     "MLPMixer",
-    "MLPMixer_S16",
-    "MLPMixer_S32",
-    "MLPMixer_B32",
-    "MLPMixer_L16",
-    "MLPMixer_L32",
-    "MLPMixer_H14",
+    "mlpmixer_s16",
+    "mlpmixer_s32",
+    "mlpmixer_b32",
+    "mlpmixer_l16",
+    "mlpmixer_l32",
+    "mlpmixer_h14",
 ]
 
 
@@ -101,7 +102,8 @@ class MLPMixer(nn.Module):
         return x
 
 
-def MLPMixer_S32(
+@register_model
+def mlpmixer_s32(
     attach_head=False,
     num_classes=1000,
     dropout=0.2,
@@ -117,7 +119,8 @@ def MLPMixer_S32(
     return MLPMixer(32, 8, 512, 2048, 256, dropout, attach_head, num_classes, **kwargs)
 
 
-def MLPMixer_S16(
+@register_model
+def mlpmixer_s16(
     attach_head=False,
     num_classes=1000,
     dropout=0.2,
@@ -133,7 +136,8 @@ def MLPMixer_S16(
     return MLPMixer(16, 8, 512, 2048, 256, dropout, attach_head, num_classes, **kwargs)
 
 
-def MLPMixer_B32(
+@register_model
+def mlpmixer_b32(
     attach_head=False,
     num_classes=1000,
     dropout=0.2,
@@ -149,7 +153,8 @@ def MLPMixer_B32(
     return MLPMixer(32, 12, 768, 3072, 384, dropout, attach_head, num_classes, **kwargs)
 
 
-def MLPMixer_L32(
+@register_model
+def mlpmixer_l32(
     attach_head=False,
     num_classes=1000,
     dropout=0.2,
@@ -167,7 +172,8 @@ def MLPMixer_L32(
     )
 
 
-def MLPMixer_L16(
+@register_model
+def mlpmixer_l16(
     attach_head=False,
     num_classes=1000,
     dropout=0.2,
@@ -185,7 +191,8 @@ def MLPMixer_L16(
     )
 
 
-def MLPMixer_H14(
+@register_model
+def mlpmixer_h14(
     attach_head=False,
     num_classes=1000,
     dropout=0.2,

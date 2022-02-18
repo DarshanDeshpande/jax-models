@@ -3,6 +3,7 @@ import flax.linen as nn
 
 from ..layers import DepthwiseConv2D, SeparableDepthwiseConv2D
 from ..activations import hardswish
+from .model_registry import register_model
 
 from typing import Optional, Union, Sequence, Iterable
 import logging
@@ -10,7 +11,7 @@ import logging
 logging.basicConfig(format="%(levelname)s:%(message)s", level=logging.INFO)
 
 
-__all__ = ["MPViT", "MPViT_Tiny", "MPViT_XSmall", "MPViT_Small", "MPViT_Base"]
+__all__ = ["MPViT", "mpvit_tiny", "mpvit_xsmall", "mpvit_small", "mpvit_base"]
 
 
 class ConvolutionalStem(nn.Module):
@@ -391,7 +392,8 @@ class MPViT(nn.Module):
         return mptb
 
 
-def MPViT_Tiny(
+@register_model
+def mpvit_tiny(
     attach_head=True,
     num_classes=1000,
     dropout=0.1,
@@ -416,7 +418,8 @@ def MPViT_Tiny(
     )
 
 
-def MPViT_XSmall(
+@register_model
+def mpvit_xsmall(
     attach_head=True,
     num_classes=1000,
     dropout=0.1,
@@ -441,7 +444,8 @@ def MPViT_XSmall(
     )
 
 
-def MPViT_Small(
+@register_model
+def mpvit_small(
     attach_head=True,
     num_classes=1000,
     dropout=0.1,
@@ -466,7 +470,8 @@ def MPViT_Small(
     )
 
 
-def MPViT_Base(
+@register_model
+def mpvit_base(
     attach_head=True,
     num_classes=1000,
     dropout=0.1,

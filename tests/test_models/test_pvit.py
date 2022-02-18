@@ -28,23 +28,23 @@ class TestSegFormer(unittest.TestCase):
     def test_pretrained(self):
         x = jnp.zeros([1, 224, 224, 3])
 
-        model, params = PViT_B0(pretrained=True, download_dir="weights/pvit")
+        model, params = pvit_b0(pretrained=True, download_dir="weights/pvit")
         model.apply({"params": params}, x, True)
 
-        model, params = PViT_B1(pretrained=True, download_dir="weights/pvit")
+        model, params = pvit_b1(pretrained=True, download_dir="weights/pvit")
         model.apply({"params": params}, x, True)
 
-        model, params = PViT_B2(pretrained=True, download_dir="weights/pvit")
+        model, params = pvit_b2(pretrained=True, download_dir="weights/pvit")
         model.apply({"params": params}, x, True)
 
-        model, params = PViT_B3(pretrained=True, download_dir="weights/pvit")
+        model, params = pvit_b3(pretrained=True, download_dir="weights/pvit")
         model.apply({"params": params}, x, True)
 
-        model, params = PViT_B4(pretrained=True, download_dir="weights/pvit")
+        model, params = pvit_b4(pretrained=True, download_dir="weights/pvit")
         model.apply({"params": params}, x, True)
 
-        model, params = PViT_B5(pretrained=True, download_dir="weights/pvit")
+        model, params = pvit_b5(pretrained=True, download_dir="weights/pvit")
         model.apply({"params": params}, x, True)
 
-        model, params = PViT_B2_Linear(pretrained=True, download_dir="weights/pvit")
+        model, params = pvit_b2_linear(pretrained=True, download_dir="weights/pvit")
         model.apply({"params": params}, x, True)

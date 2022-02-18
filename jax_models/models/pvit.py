@@ -5,16 +5,17 @@ from typing import Optional, Iterable
 
 from ..layers import OverlapPatchEmbed, TransformerMLP, AdaptiveAveragePool2D, DropPath
 from ..models.helper import download_checkpoint_params, load_trained_params
+from .model_registry import register_model
 
 __all__ = [
     "PyramidViT",
-    "PViT_B0",
-    "PViT_B1",
-    "PViT_B2",
-    "PViT_B2_Linear",
-    "PViT_B3",
-    "PViT_B4",
-    "PViT_B5",
+    "pvit_b0",
+    "pvit_b1",
+    "pvit_b2",
+    "pvit_b2_linear",
+    "pvit_b3",
+    "pvit_b4",
+    "pvit_b5",
 ]
 
 pretrained_cfgs = {
@@ -224,7 +225,8 @@ class PyramidViT(nn.Module):
         return x
 
 
-def PViT_B0(
+@register_model
+def pvit_b0(
     attach_head=True, num_classes=1000, dropout=0.0, pretrained=False, download_dir=None
 ):
     model = PyramidViT(
@@ -249,7 +251,8 @@ def PViT_B0(
         return model
 
 
-def PViT_B1(
+@register_model
+def pvit_b1(
     attach_head=True, num_classes=1000, dropout=0.0, pretrained=False, download_dir=None
 ):
     model = PyramidViT(
@@ -274,7 +277,8 @@ def PViT_B1(
         return model
 
 
-def PViT_B2(
+@register_model
+def pvit_b2(
     attach_head=True, num_classes=1000, dropout=0.0, pretrained=False, download_dir=None
 ):
     model = PyramidViT(
@@ -299,7 +303,8 @@ def PViT_B2(
         return model
 
 
-def PViT_B3(
+@register_model
+def pvit_b3(
     attach_head=True, num_classes=1000, dropout=0.0, pretrained=False, download_dir=None
 ):
     model = PyramidViT(
@@ -324,7 +329,8 @@ def PViT_B3(
         return model
 
 
-def PViT_B4(
+@register_model
+def pvit_b4(
     attach_head=True, num_classes=1000, dropout=0.0, pretrained=False, download_dir=None
 ):
     model = PyramidViT(
@@ -349,7 +355,8 @@ def PViT_B4(
         return model
 
 
-def PViT_B5(
+@register_model
+def pvit_b5(
     attach_head=True, num_classes=1000, dropout=0.0, pretrained=False, download_dir=None
 ):
     model = PyramidViT(
@@ -374,7 +381,8 @@ def PViT_B5(
         return model
 
 
-def PViT_B2_Linear(
+@register_model
+def pvit_b2_linear(
     attach_head=True, num_classes=1000, dropout=0.0, pretrained=False, download_dir=None
 ):
     model = PyramidViT(

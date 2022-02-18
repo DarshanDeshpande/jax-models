@@ -4,20 +4,22 @@ import flax.linen as nn
 
 from ..layers import DropPath, TransformerMLP, PatchEmbed
 from .helper import download_checkpoint_params, load_trained_params
+from .model_registry import register_model
+
 from typing import Optional
 
 __all__ = [
     "CaiT",
-    "XXS24_224",
-    "XXS24_384",
-    "XXS36_224",
-    "XXS36_384",
-    "XS24_384",
-    "S24_224",
-    "S24_384",
-    "S36_384",
-    "M36_384",
-    "M48_448",
+    "cait_xxs24_224",
+    "cait_xxs24_384",
+    "cait_xxs36_224",
+    "cait_xxs36_384",
+    "cait_xs24_384",
+    "cait_s24_224",
+    "cait_s24_384",
+    "cait_s36_384",
+    "cait_m36_384",
+    "cait_m48_448",
 ]
 
 pretrained_cfgs = {
@@ -207,6 +209,28 @@ class LayerScaleBlock(nn.Module):
 
 
 class CaiT(nn.Module):
+    """
+    Module for Class-Attention in Image Transformers
+
+    Attributes:
+        patch_size (int): Patch size. Default is 16.
+        embed_dim (int): Embedding dimension. Default is 768.
+        depth (int): Number of blocks. Default is 12.
+        num_heads (int): Number of attention heads. Default is 12.
+        mlp_ratio (int): Multiplier for hidden dimension in transformer MLP block. Default is 4.
+        use_att_bias (bool): Whether to use bias for linear qkv projection. Default is True.
+        drop (float): Dropout value. Default is 0.
+        att_dropout (float): Dropout value for attention Default is 0.
+        drop_path (float): Dropout value for DropPath. Default is 0.
+        init_scale (float): Initialization scale used for gamma initialization. Default is 1e-4.
+        depth_token_only (int): Number of blocks with cls_token and class attention. Default is 2.
+        mlp_ratio_clstk (int):  Multiplier for hidden dimension in transformer MLP block with class attention. Default is 4.
+        attach_head (bool): Whether to attach classification head. Default is True
+        num_classes (int): Number of classification classes. Only works if attach_head is True. Default is 1000.
+        deterministic (bool): Optional argument, if True, network becomes deterministic and dropout is not applied.
+
+    """
+
     patch_size: int = 16
     embed_dim: int = 768
     depth: int = 12
@@ -281,7 +305,8 @@ class CaiT(nn.Module):
         return x
 
 
-def XXS24_224(
+@register_model
+def cait_xxs24_224(
     attach_head=True,
     num_classes=1000,
     dropout=0.0,
@@ -310,7 +335,8 @@ def XXS24_224(
         return model, params
 
 
-def XXS24_384(
+@register_model
+def cait_xxs24_384(
     attach_head=True,
     num_classes=1000,
     dropout=0.0,
@@ -339,7 +365,8 @@ def XXS24_384(
         return model, params
 
 
-def XXS36_224(
+@register_model
+def cait_xxs36_224(
     attach_head=True,
     num_classes=1000,
     dropout=0.0,
@@ -368,7 +395,8 @@ def XXS36_224(
         return model, params
 
 
-def XXS36_384(
+@register_model
+def cait_xxs36_384(
     attach_head=True,
     num_classes=1000,
     dropout=0.0,
@@ -397,7 +425,8 @@ def XXS36_384(
         return model, params
 
 
-def XS24_384(
+@register_model
+def cait_xs24_384(
     attach_head=True,
     num_classes=1000,
     dropout=0.0,
@@ -426,7 +455,8 @@ def XS24_384(
         return model, params
 
 
-def S24_224(
+@register_model
+def cait_s24_224(
     attach_head=True,
     num_classes=1000,
     dropout=0.0,
@@ -455,7 +485,8 @@ def S24_224(
         return model, params
 
 
-def S24_384(
+@register_model
+def cait_s24_384(
     attach_head=True,
     num_classes=1000,
     dropout=0.0,
@@ -484,7 +515,8 @@ def S24_384(
         return model, params
 
 
-def S36_384(
+@register_model
+def cait_s36_384(
     attach_head=True,
     num_classes=1000,
     dropout=0.0,
@@ -513,7 +545,8 @@ def S36_384(
         return model, params
 
 
-def M36_384(
+@register_model
+def cait_m36_384(
     attach_head=True,
     num_classes=1000,
     dropout=0.0,
@@ -542,7 +575,8 @@ def M36_384(
         return model, params
 
 
-def M48_448(
+@register_model
+def cait_m48_448(
     attach_head=True,
     num_classes=1000,
     dropout=0.0,

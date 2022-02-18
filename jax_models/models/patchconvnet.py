@@ -2,6 +2,7 @@ import jax.numpy as jnp
 import flax.linen as nn
 
 from ..layers import SqueezeAndExcitation, DropPath, TransformerMLP
+from .model_registry import register_model
 
 from typing import Optional
 import logging
@@ -10,12 +11,12 @@ logging.basicConfig(format="%(levelname)s:%(message)s", level=logging.INFO)
 
 __all__ = [
     "PatchConvNet",
-    "PatchConvNet_S60",
-    "PatchConvNet_S120",
-    "PatchConvNet_B60",
-    "PatchConvNet_B120",
-    "PatchConvNet_L60",
-    "PatchConvNet_L120",
+    "patchconvnet_s60",
+    "patchconvnet_s120",
+    "patchconvnet_b60",
+    "patchconvnet_b120",
+    "patchconvnet_l60",
+    "patchconvnet_l120",
 ]
 
 
@@ -191,7 +192,8 @@ class PatchConvNet(nn.Module):
         return x
 
 
-def PatchConvNet_S60(
+@register_model
+def patchconvnet_s60(
     attach_head=True,
     num_classes=1000,
     dropout=0.1,
@@ -208,10 +210,17 @@ def PatchConvNet_S60(
         num_classes=num_classes,
         **kwargs
     )
+
+    if pretrained:
+        logging.info(
+            "Pretrained PatchConvNet models aren't available. Loading un-trained model instead"
+        )
+
     return model
 
 
-def PatchConvNet_S120(
+@register_model
+def patchconvnet_s120(
     attach_head=True,
     num_classes=1000,
     dropout=0.1,
@@ -228,10 +237,17 @@ def PatchConvNet_S120(
         num_classes=num_classes,
         **kwargs
     )
+
+    if pretrained:
+        logging.info(
+            "Pretrained PatchConvNet models aren't available. Loading un-trained model instead"
+        )
+
     return model
 
 
-def PatchConvNet_B60(
+@register_model
+def patchconvnet_b60(
     attach_head=True,
     num_classes=1000,
     dropout=0.1,
@@ -248,10 +264,17 @@ def PatchConvNet_B60(
         num_classes=num_classes,
         **kwargs
     )
+
+    if pretrained:
+        logging.info(
+            "Pretrained PatchConvNet models aren't available. Loading un-trained model instead"
+        )
+
     return model
 
 
-def PatchConvNet_B120(
+@register_model
+def patchconvnet_b120(
     attach_head=True,
     num_classes=1000,
     dropout=0.1,
@@ -268,10 +291,17 @@ def PatchConvNet_B120(
         num_classes=num_classes,
         **kwargs
     )
+
+    if pretrained:
+        logging.info(
+            "Pretrained PatchConvNet models aren't available. Loading un-trained model instead"
+        )
+
     return model
 
 
-def PatchConvNet_L60(
+@register_model
+def patchconvnet_l60(
     attach_head=True,
     num_classes=1000,
     dropout=0.1,
@@ -288,10 +318,17 @@ def PatchConvNet_L60(
         num_classes=num_classes,
         **kwargs
     )
+
+    if pretrained:
+        logging.info(
+            "Pretrained PatchConvNet models aren't available. Loading un-trained model instead"
+        )
+
     return model
 
 
-def PatchConvNet_L120(
+@register_model
+def patchconvnet_l120(
     attach_head=True,
     num_classes=1000,
     dropout=0.1,
@@ -308,4 +345,10 @@ def PatchConvNet_L120(
         num_classes=num_classes,
         **kwargs
     )
+
+    if pretrained:
+        logging.info(
+            "Pretrained PatchConvNet models aren't available. Loading un-trained model instead"
+        )
+
     return model

@@ -3,6 +3,7 @@ from jax.image import resize
 import flax.linen as nn
 
 from ..layers import DropPath, TransformerMLP, OverlapPatchEmbed
+from .model_registry import register_model
 
 from typing import Optional, Iterable, Any
 import logging
@@ -10,13 +11,13 @@ import logging
 logging.basicConfig(format="%(levelname)s:%(message)s", level=logging.INFO)
 
 __all__ = [
-    "SegFormer",
-    "SegFormer_B0",
-    "SegFormer_B1",
-    "SegFormer_B2",
-    "SegFormer_B3",
-    "SegFormer_B4",
-    "SegFormer_B5",
+    "Segformer",
+    "segformer_b0",
+    "segformer_b1",
+    "segformer_b2",
+    "segformer_b3",
+    "segformer_b4",
+    "segformer_b5",
 ]
 
 
@@ -336,7 +337,8 @@ class SegFormer(nn.Module):
             return out_list
 
 
-def SegFormer_B0(
+@register_model
+def segformer_b0(
     attach_head=False,
     num_classes=19,
     dropout=0.0,
@@ -366,7 +368,8 @@ def SegFormer_B0(
     )
 
 
-def SegFormer_B1(
+@register_model
+def segformer_b1(
     attach_head=False,
     num_classes=19,
     dropout=0.0,
@@ -396,7 +399,8 @@ def SegFormer_B1(
     )
 
 
-def SegFormer_B2(
+@register_model
+def segformer_b2(
     attach_head=False,
     num_classes=19,
     dropout=0.0,
@@ -426,7 +430,8 @@ def SegFormer_B2(
     )
 
 
-def SegFormer_B3(
+@register_model
+def segformer_b3(
     attach_head=False,
     num_classes=19,
     dropout=0.0,
@@ -456,7 +461,8 @@ def SegFormer_B3(
     )
 
 
-def SegFormer_B4(
+@register_model
+def segformer_b4(
     attach_head=False,
     num_classes=19,
     dropout=0.0,
@@ -486,7 +492,8 @@ def SegFormer_B4(
     )
 
 
-def SegFormer_B5(
+@register_model
+def segformer_b5(
     attach_head=False,
     num_classes=19,
     dropout=0.0,
