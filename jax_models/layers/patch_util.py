@@ -1,6 +1,7 @@
 from typing import Callable
 import jax.numpy as jnp
 import flax.linen as nn
+from numpy import swapaxes
 
 
 class ExtractPatches(nn.Module):
@@ -11,6 +12,7 @@ class ExtractPatches(nn.Module):
         x = jnp.reshape(
             inputs, (batch, height, patch_size, width, patch_size, channels)
         )
+        x = jnp.swapaxes(x, 2, 3)
         x = jnp.reshape(x, (batch, height * width, patch_size ** 2 * channels))
         return x
 
@@ -21,6 +23,7 @@ class MergePatches(nn.Module):
         batch, length, _ = inputs.shape
         height = width = int(length ** 0.5)
         x = jnp.reshape(inputs, (batch, height, patch_size, width, patch_size, -1))
+        x = jnp.swapaxes(x, 2, 3)
         x = jnp.reshape(x, (batch, height * patch_size, width * patch_size, -1))
         return x
 
@@ -51,6 +54,7 @@ class OverlapPatchEmbed(nn.Module):
     emb_dim: int = 768
     patch_size: int = 16
     stride: int = 4
+    kernel_init: Callable = nn.initializers.xavier_normal()
 
     @nn.compact
     def __call__(self, inputs):
@@ -62,6 +66,7 @@ class OverlapPatchEmbed(nn.Module):
                 (self.patch_size // 2, self.patch_size // 2),
                 (self.patch_size // 2, self.patch_size // 2),
             ),
+            kernel_init=self.kernel_init,
             name="proj",
         )(inputs)
         flat = jnp.reshape(conv, (conv.shape[0], -1, conv.shape[-1]))

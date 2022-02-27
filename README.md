@@ -50,6 +50,7 @@ Available model implementations for JAX are:
 9. <a href="https://arxiv.org/abs/2103.14030">Swin Transformer: Hierarchical Vision Transformer using Shifted Windows</a> (Ze Liu et al., 2021)
 10. <a href="https://arxiv.org/abs/2102.12122">Pyramid Vision Transformer: A Versatile Backbone for Dense Prediction without Convolutions</a> (Wenhai Wang et al., 2021)
 11. <a href="https://arxiv.org/abs/2103.17239">Going deeper with Image Transformers</a> (Hugo Touvron et al., 2021)
+12. <a href="https://arxiv.org/abs/2202.09741">Visual Attention Network</a> (Meng-Hao Guo et al., 2022)
 
 <br>
 Available layers for out-of-the-box integration:

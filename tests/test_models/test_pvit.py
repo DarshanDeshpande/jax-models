@@ -5,7 +5,7 @@ import jax.random as random
 from jax_models.models.pvit import *
 
 
-class TestSegFormer(unittest.TestCase):
+class TestPViT(unittest.TestCase):
     def test_output_shape(self):
         model = PyramidViT(
             patch_size=4,
