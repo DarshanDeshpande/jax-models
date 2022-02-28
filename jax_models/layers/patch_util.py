@@ -1,7 +1,6 @@
 from typing import Callable
 import jax.numpy as jnp
 import flax.linen as nn
-from numpy import swapaxes
 
 
 class ExtractPatches(nn.Module):
@@ -22,7 +21,7 @@ class MergePatches(nn.Module):
     def __call__(self, inputs, patch_size):
         batch, length, _ = inputs.shape
         height = width = int(length ** 0.5)
-        x = jnp.reshape(inputs, (batch, height, patch_size, width, patch_size, -1))
+        x = jnp.reshape(inputs, (batch, height, width, patch_size, patch_size, -1))
         x = jnp.swapaxes(x, 2, 3)
         x = jnp.reshape(x, (batch, height * patch_size, width * patch_size, -1))
         return x
