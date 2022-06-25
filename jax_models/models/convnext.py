@@ -112,7 +112,7 @@ class ConvNeXt(nn.Module):
             "deterministic", self.deterministic, deterministic
         )
 
-        dp_rates = [x.item() for x in jnp.linspace(0, self.drop_path, sum(self.depths))]
+        dp_rates = jnp.linspace(0, self.drop_path, sum(self.depths))
         curr = 0
 
         # Stem
